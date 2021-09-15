@@ -1,2 +1,2 @@
-# GroupTetris
+# Tetris-Lite
 Group Project

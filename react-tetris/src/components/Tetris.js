@@ -25,7 +25,7 @@ const Tetris = () => {
   );
 
   console.log('re-render');
-
+  //console.log(player.pos)
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: dir, y: 0 })) {
       updatePlayerPos({ x: dir, y: 0 });
@@ -41,10 +41,98 @@ const Tetris = () => {
     }
   };
 
+  const checkBoard = () => {
+    for (let _y = 0; _y < stage.length; _y+=1) {
+      for (let _x = 0; _x < stage[_y].length; _x+=1) {
+        if (stage[_y][_x][1] !== 'clear') {
+          console.log("Board is not clear")
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  const findBottom = () => {
+    let row = []
+    for (let _y = player.tetromino.length-1; _y > 0; _y-=1) {
+      for (let _x = 0; _x < player.tetromino[0].length; _x+=1) {
+        if (player.tetromino[_y][_x] !== 0) {
+          row[_x] = true
+        } else { row[_x] = false }
+      }
+      if (row.includes(true)) {
+        return row
+      }
+    }
+    return false;
+  }
+
+  const emptyColumn = () => {
+    // find the highest empty row
+    let e_row = null; // will equal the highest empty row
+    console.log("Debug e_row: ",e_row)
+    //console.log("stage length: ", stage.length-1)
+    for (let ey = stage.length-1; ey > 0; ey-=1) {
+      console.log("Working row: ", ey)
+      let empty = true;
+      for (let ex = 0; ex < stage[0].length; ex+=1) {
+        //console.log("Working column: ", ex)
+        if (stage[ey][ex][0] !== 0) {
+          console.log(stage)
+          console.log(stage[ey][ex])
+          console.log("found false in row: ", ey)
+          empty = false;
+          break;
+        }
+      }
+      if (empty === true) {
+        console.log("Found empty row at :", ey)
+        e_row = ey
+        break;
+      }
+    }
+
+    console.log("Debug e_row: ",e_row)
+    let col = []
+    // for bottom row only
+    if (e_row === 19) {
+      console.log(stage[e_row-1])
+      for (let _x = 0; _x < stage[e_row].length; _x+=1) {
+        col[_x] = true;
+        if (stage[e_row][_x][0] !== 0) {
+          col[_x] = false;
+        }
+      }
+    } else if (e_row !== null) {
+      console.log(stage[e_row-1])
+      for (let _x = 0; _x < stage[e_row].length; _x+=1) {
+        col[_x] = true;
+        if (stage[e_row+1][_x][0] !== 0) {
+          col[_x] = false;
+        }
+      }
+    }
+    return col
+  }
+
+  const autoPlay = () => {
+    let col = emptyColumn()
+    console.log("Columns: ", col)
+    console.log("Player Pos: ", player.pos)
+    if (col[player.pos.x+1] === false) {
+      // if (col[player.pos.x-1] === )
+       movePlayer(1)
+    }
+
+    // console.log(findBottom())
+    // console.log(emptyColumn())
+  }
+
   const startGame = () => {
     // Reset everything
     setStage(createStage());
-    setDropTime(1000);
+    setDropTime(100);
     resetPlayer();
     setScore(0);
     setLevel(0);
@@ -71,6 +159,7 @@ const Tetris = () => {
       }
       updatePlayerPos({ x: 0, y: 0, collided: true });
     }
+    autoPlay();
   };
 
   const dropPlayer = () => {

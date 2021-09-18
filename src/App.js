@@ -8,6 +8,7 @@ import { Home } from './components/Home'
 import { SignUp } from './components/authentication/SignUp'
 import { Login } from './components/authentication/Login'
 import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
+import Tetris from './components/tetris/Tetris'
 
 
 
@@ -41,7 +42,7 @@ const UnauthenticatedRoute = ({ component: C, ...props }) => {
   )
 }
 
-function App() {
+const App = () => {
   return (
     <AuthContextProvider>
       <Router>
@@ -51,6 +52,7 @@ function App() {
             <Link to="/signup">SignUp</Link> | <Link to="/tetris">Tetris!</Link> |{' '}
           </div>
           <AuthenticatedRoute exact path="/" component={Home} />
+          <AuthenticatedRoute exact path="/tetris" component={Tetris} />
           <UnauthenticatedRoute exact path="/signup" component={SignUp} />
           <UnauthenticatedRoute exact path="/login" component={Login} />
       </Router>

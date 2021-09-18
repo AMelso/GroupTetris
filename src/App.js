@@ -4,11 +4,11 @@ import {
   Link,
   Redirect
 } from 'react-router-dom'
-import { Home } from './Home'
-import { SignUp } from './SignUp'
-import { Login } from './Login'
+import { Home } from './components/Home'
+import { SignUp } from './components/authentication/SignUp'
+import { Login } from './components/authentication/Login'
 import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
-import Tetris from './components/Tetris'
+
 
 
 // C is a placeholder for passed component from route tree. 
@@ -45,7 +45,6 @@ function App() {
   return (
     <AuthContextProvider>
       <Router>
-        <AuthenticatedRoute exact path="/tetris" component={Tetris} />
           {/* Next 4 lines need to go in it's own Navbar component */}
           <div>
             <Link to="/">Home</Link> | <Link to="/login">Login</Link> |{' '}

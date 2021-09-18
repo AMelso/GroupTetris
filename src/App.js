@@ -7,22 +7,26 @@ import {
 import { Home } from './Home'
 import { SignUp } from './SignUp'
 import { Login } from './Login'
-import { AuthContextProvider, useAuthState } from './firebase'
+import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
 import Tetris from './components/Tetris'
 
+
+// C is a placeholder for passed component from route tree. 
 const AuthenticatedRoute = ({ component: C, ...props }) => {
-  const { isAuthenticated } = useAuthState()
+  const { isAuthenticated } = useAuthState() // isAuthenticated returns Boolean, pulled from useAuthState().isAuthenticated
   console.log(`AuthenticatedRoute: ${isAuthenticated}`)
   return (
     <Route
       {...props}
       render={routeProps =>
-        isAuthenticated ? <C {...routeProps} /> : <Redirect to="/login" />
+        // If user is authenticated send user to component, if not send to login
+        isAuthenticated ? <C {...routeProps} /> : <Redirect to="/login" /> 
       }
     />
   )
 }
 
+// See comments for AuthenticatedRoute
 const UnauthenticatedRoute = ({ component: C, ...props }) => {
   const { isAuthenticated } = useAuthState()
   console.log(`UnauthenticatedRoute: ${isAuthenticated}`)
@@ -30,6 +34,7 @@ const UnauthenticatedRoute = ({ component: C, ...props }) => {
     <Route
       {...props}
       render={routeProps =>
+        // If user is NOT authenticated then load requested component, otherwise redirect user to home
         !isAuthenticated ? <C {...routeProps} /> : <Redirect to="/" />
       }
     />
@@ -41,6 +46,7 @@ function App() {
     <AuthContextProvider>
       <Router>
         <AuthenticatedRoute exact path="/tetris" component={Tetris} />
+          {/* Next 4 lines need to go in it's own Navbar component */}
           <div>
             <Link to="/">Home</Link> | <Link to="/login">Login</Link> |{' '}
             <Link to="/signup">SignUp</Link> | <Link to="/tetris">Tetris!</Link> |{' '}

@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback } from 'react' // DOC: https://reactjs.org/docs/hooks-reference.html#usecallback
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { Button, Form } from 'semantic-ui-react'
 
@@ -6,10 +6,10 @@ export const Login = () => {
   const handleSubmit = useCallback(async e => {
     e.preventDefault()
 
-    const { email, password } = e.target.elements
-    const auth = getAuth()
+    const { email, password } = e.target.elements // Get email and password objects from form
+    const auth = getAuth() // DOC: https://firebase.google.com/docs/reference/unity/class/firebase/auth/firebase-auth
     try {
-      await signInWithEmailAndPassword(auth, email.value, password.value)
+      await signInWithEmailAndPassword(auth, email.value, password.value) // Attempt to log in
     } catch (e) {
       alert(e.message)
     }

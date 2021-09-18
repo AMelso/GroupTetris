@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css'
 import './index.css';
 
 ReactDOM.render(
+  // StrictMode activates additional checks and warnings for it's decendants
   <React.StrictMode>
     <App />
   </React.StrictMode>,

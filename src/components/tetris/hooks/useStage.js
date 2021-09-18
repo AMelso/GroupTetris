@@ -1,60 +1,38 @@
-import { useState, useEffect } from 'react';
-import { createStage } from '../gameHelpers';
+import { useState, useEffect } from 'react'
+import { createStage } from '../files/gameHelpers'
 
 export const useStage = (player, resetPlayer) => {
-  const [stage, setStage] = useState(createStage());
-  const [rowsCleared, setRowsCleared] = useState(0);
+  const [stage, setStage] = useState(createStage())
 
   useEffect(() => {
-    setRowsCleared(0);
-
-    // checks if rows are full, it then takes that row out and puts it up above
-    // second most confusing function he wrote during the tutorial
-    const sweepRows = newStage =>
-      newStage.reduce((ack, row) => {
-        if (row.findIndex(cell => cell[0] === 0) === -1) {
-          setRowsCleared(prev => prev + 1);
-          ack.unshift(new Array(newStage[0].length).fill([0, 'clear']));
-          return ack;
-        }
-        ack.push(row);
-        return ack;
-      }, []);
-
     const updateStage = prevStage => {
       // First flush the stage
-      const newStage = prevStage.map(row =>
-        row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell))
-      );
+      // Take the previous stage and map through each row
+      const newStage = prevStage.map(row => 
+        // Take the row and map through every cell
+        row.map(cell => (cell[1] === 'clear' ? [0, 'clear'] : cell)), // For every cell check if it is clear or filled, in which case write the new stage's cell in that row as clear or filled
+      )
 
       // Then draw the tetromino
+      // For each row
       player.tetromino.forEach((row, y) => {
+        // For each cell
         row.forEach((value, x) => {
+          // If the value of that cell is not 0
           if (value !== 0) {
-            newStage[y + player.pos.y][x + player.pos.x] = [
-              value,
-              `${player.collided ? 'merged' : 'clear'}`,
-            ];
+            // Update the position of that cell on the next stage
+            newStage[y + player.pos.y][x + player.pos.x] = [ // newStage at position x by y =
+              value, // value of the tetromino
+              `${player.collided ? 'merged' : 'clear'}`, // if it is cleared or merged
+            ]
           }
-        });
-      });
-      // Then check if we got some score if collided
-      if (player.collided) {
-        resetPlayer();
-        return sweepRows(newStage);
-      }
-      return newStage;
-    };
+        })
+      })
+      return newStage
+    }
 
-    // Here are the updates
-    setStage(prev => updateStage(prev));
-  }, [
-    player.collided,
-    player.pos.x,
-    player.pos.y,
-    player.tetromino,
-    resetPlayer,
-  ]);
+    setStage(prev => updateStage(prev))
+  }, [player])
 
-  return [stage, setStage, rowsCleared];
-};
+  return [stage, setStage]
+}

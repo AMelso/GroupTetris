@@ -34,7 +34,7 @@ const Tetris = () => {
   }
 
   const drop = () => {
-    updatePlayerPos({ x: 0, y: 1, collided: false })
+    updatePlayerPos({ x: 0, y: .5, collided: false }) // FIXING DOUBLE MOVE ERROR, Y SHOULD BE 1
   }
 
   const dropPlayer = () => {
@@ -44,9 +44,9 @@ const Tetris = () => {
   const move = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 37) {
-        movePlayer(-1)
+        movePlayer(-.5) // FIXING DOUBLE MOVE ERROR, SHOULD BE 1
       } else if (keyCode === 39) {
-        movePlayer(1)
+        movePlayer(.5) // FIXING DOUBLE MOVE ERROR, SHOULD BE 1
       } else if (keyCode === 40) {
         dropPlayer()
       }

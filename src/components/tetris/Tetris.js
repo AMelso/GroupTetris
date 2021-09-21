@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { createStage } from './files/gameHelpers'
+import { createStage, checkCollision } from './files/gameHelpers'
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
@@ -24,7 +24,9 @@ const Tetris = () => {
   console.log('re-render')
 
   const movePlayer = dir => {
-    updatePlayerPos({ x: dir, y: 0 })
+    if (!checkCollision(player, stage, { x: (dir * 2), y: 0})) { // FIXED DOUBLE MOVE ERROR, SHOULD BE { x: dir, y: 0}
+      updatePlayerPos({ x: dir, y: 0 })
+    }
   }
 
   const startGame = () => {

@@ -27,7 +27,7 @@ const Tetris = () => {
   console.log('re-render')
 
   const movePlayer = dir => {
-    if (!checkCollision(player, stage, { x: (dir), y: 0})) { // FIXED DOUBLE MOVE ERROR, SHOULD BE { x: dir, y: 0}
+    if (!checkCollision(player, stage, { x: (dir), y: 0})) {
       updatePlayerPos({ x: dir, y: 0 })
     }
   }
@@ -52,7 +52,7 @@ const Tetris = () => {
     }
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
-      updatePlayerPos({ x: 0, y: 1, collided: false }) // FIXING DOUBLE MOVE ERROR, Y SHOULD BE 1
+      updatePlayerPos({ x: 0, y: 1, collided: false })
     } else {
       // Game over
       if (player.pos.y < 1) {
@@ -82,9 +82,9 @@ const Tetris = () => {
   const move = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 37) {
-        movePlayer(-1) // FIXING DOUBLE MOVE ERROR, SHOULD BE 1
+        movePlayer(-1) 
       } else if (keyCode === 39) {
-        movePlayer(1) // FIXING DOUBLE MOVE ERROR, SHOULD BE 1
+        movePlayer(1)
       } else if (keyCode === 40) {
         dropPlayer()
       } else if (keyCode === 38) {

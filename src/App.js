@@ -1,12 +1,12 @@
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Redirect
 } from 'react-router-dom'
 import { Home } from './components/Home'
 import { SignUp } from './components/authentication/SignUp'
 import { Login } from './components/authentication/Login'
+import  Navbar  from './components/Navbar'
 import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
 import Tetris from './components/tetris/Tetris'
 
@@ -46,11 +46,7 @@ const App = () => {
   return (
     <AuthContextProvider>
       <Router>
-          {/* Next 4 lines need to go in it's own Navbar component */}
-          <div>
-            <Link to="/">Home</Link> | <Link to="/login">Login</Link> |{' '}
-            <Link to="/signup">SignUp</Link> | <Link to="/tetris">Tetris!</Link> |{' '}
-          </div>
+          <Navbar/>
           <AuthenticatedRoute exact path="/" component={Home} />
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
           <Route exact path="/signup" render={(props) => <SignUp {...props} />} />

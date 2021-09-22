@@ -3,63 +3,56 @@ import { Icon, Menu } from 'semantic-ui-react'
 import { NavLink} from 'react-router-dom'
 import { getAuth, signOut } from 'firebase/auth'
 
+// Icon names found at https://semantic-ui.com/elements/icon.html#status
+
 
 class Navbar extends Component {
-  state = { activeItem: 'home' }
-
-  handleItemClick = (e, { name }) => {
-    this.setState({ activeItem: name })
-  }
+  
 
   render() {
-    const { activeItem } = this.state
+    
 
     return (
+      // set menu to include icons as menu icon: semantic ui menu
       <Menu icon='labeled'>
+        {/* first item, give link, and component name (dev tools menu item name) */}
         <Menu.Item
-          as={NavLink} to="/"
+          as={NavLink} exact to="/"
           name='home'
-          active={activeItem === 'home'}
-          onClick={this.handleItemClick}
+          // add a divider for html txt
         >
+          {/* set icon by name from icon names url */}
           <Icon name='home'/>
+          {/* text to label navbar menu item */}
           Home
         </Menu.Item>
         <Menu.Item
-          as={NavLink} to="/login"
+          as={NavLink} exact to="/login"
           name='login'
-          active={activeItem === 'login'}
-          onClick={this.handleItemClick}
         >
           <Icon name='sign in alternate'/>
           Sign in
         </Menu.Item>
         <Menu.Item
-          as={NavLink} to="/signup"
+          as={NavLink} exact to="/signup"
           name='signup'
-          active={activeItem === 'signup'}
-          onClick={this.handleItemClick}
         >
           <Icon name='plus'/>
           Register
         </Menu.Item>
         <Menu.Item
-          as={NavLink} to="/tetris"
+          as={NavLink} exact to="/tetris"
           name='tetris'
-          active={activeItem === 'tetris'}
-          onClick={this.handleItemClick}
         >
           <Icon name='gamepad'/>
           Tetris
         </Menu.Item>
 
-
         {/* menu position right starts elements on right side of navbar */}
         <Menu.Menu position='right'>
+          {/* Logout button logs out on click, since its unauthenticated, gets thrown to home, which redirects to login */}
           <Menu.Item
-            as={NavLink} to="/logout"
             name='logout'
-            active={activeItem === 'logout'}
             onClick={() => signOut(getAuth())}
           >
             <Icon name='sign out alternate'/>

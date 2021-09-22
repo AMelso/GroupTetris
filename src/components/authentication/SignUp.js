@@ -1,19 +1,28 @@
 import { useCallback } from 'react' // DOC: https://reactjs.org/docs/hooks-reference.html#usecallback
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { getFirestore, doc, setDoc } from "firebase/firestore"
 import { Button, Form } from 'semantic-ui-react'
 
-export const SignUp = () => {
+export const SignUp = (props) => {
+
   const handleSubmit = useCallback(async e => {
     e.preventDefault()
+
+    const db = getFirestore()
 
     const { email, password } = e.target.elements
     const auth = getAuth() // DOC: https://firebase.google.com/docs/reference/unity/class/firebase/auth/firebase-auth
     try {
-      await createUserWithEmailAndPassword(auth, email.value, password.value) // Attempt to create new user
+      const newUser = await createUserWithEmailAndPassword(auth, email.value, password.value) // Attempt to create new user
+      console.log('USER: ', newUser.user.uid)
+      await setDoc(doc(db, "users", newUser.user.uid), {
+        points: 0,
+      })
+      props.history.push('/')
     } catch (e) {
-      alert(e.message)
+      console.log(e)
     }
-  }, [])
+  }, [props.history])
 
   return (
     <>
@@ -35,9 +44,7 @@ export const SignUp = () => {
               name="password"
             />
           </Form.Field>
-          <Button 
-            type='submit'
-            onClick >
+          <Button type='submit'>
               Sign Up
           </Button>
       </Form>

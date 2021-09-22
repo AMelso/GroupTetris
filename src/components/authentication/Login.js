@@ -35,9 +35,7 @@ export const Login = () => {
             name="password"
           />
         </Form.Field>
-        <Button 
-          type='submit'
-          onClick >
+        <Button type='submit'>
             Log In
         </Button>
       </Form>

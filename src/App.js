@@ -53,7 +53,7 @@ const App = () => {
           </div>
           <AuthenticatedRoute exact path="/" component={Home} />
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
-          <UnauthenticatedRoute exact path="/signup" component={SignUp} />
+          <Route exact path="/signup" render={(props) => <SignUp {...props} />} />
           <UnauthenticatedRoute exact path="/login" component={Login} />
       </Router>
     </AuthContextProvider>

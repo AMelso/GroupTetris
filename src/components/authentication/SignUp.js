@@ -37,7 +37,7 @@ export const SignUp = () => {
           </Form.Field>
           <Button 
             type='submit'
-            onClick >
+            >
               Sign Up
           </Button>
       </Form>

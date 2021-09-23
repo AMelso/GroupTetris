@@ -27,7 +27,9 @@ body {
 	padding-left: 1rem;
 	color: #FFF;
 	}
-
+  .navbar img{
+    max-width: 100%;
+  }
 .navbar-nav {
    display: -ms-flexbox;
    display: flex;

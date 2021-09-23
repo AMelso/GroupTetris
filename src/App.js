@@ -8,10 +8,10 @@ import { SignUp } from './components/authentication/SignUp'
 import { Login } from './components/authentication/Login'
 import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
 import Tetris from './components/tetris/Tetris'
-import NavBar from './components/pages/NavBar'
+import NavigationMenu from './components/pages/NavigationMenu'
 import ProfilePage from './components/pages/Profile'
 import ChangePassword from './components/pages/ChangePassword'
-import Blogs from './components/pages/Blogs'
+import ScoreBoard from './components/pages/ScoreBoard'
 
 
 
@@ -50,13 +50,15 @@ const App = () => {
     <AuthContextProvider>
       <Router>
           {/* Next 4 lines need to go in it's own Navbar component */}
+          {/* Bootstrap container CSS class to set the max width of box and also as per mobile or ipad device as well */}
           <div className="container">
-          <NavBar/>
+            {/* sub-component for top navigation menu */}
+          <NavigationMenu/>
           <AuthenticatedRoute exact path="/" component={Home} />
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
           <AuthenticatedRoute exact path="/profile" component={ProfilePage} />
           <AuthenticatedRoute exact path="/change-password" component={ChangePassword}/>
-          <AuthenticatedRoute exact path="/blogs" component={Blogs}/>
+          <AuthenticatedRoute exact path="/score-board" component={ScoreBoard}/>
           <UnauthenticatedRoute exact path="/signup" component={SignUp} />
           <UnauthenticatedRoute exact path="/login" component={Login} />
           </div>

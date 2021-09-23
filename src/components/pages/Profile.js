@@ -4,6 +4,7 @@ const ProfilePage = () => {
     
     return (
         <>
+        {/* code from bootsnip UserProfile 2 */}
             <div className="row">
                 <SidebarNav/> 
             <div className="col-md-9">

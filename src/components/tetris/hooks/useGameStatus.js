@@ -1,11 +1,18 @@
 import { useState, useEffect, useCallback } from 'react'
+import { GetPoints } from '../files/fireBaseIntegration'
 
 export const useGameStatus = rowsCleared => {
+  const [ oldPoints, setOldPoints ] = useState(null)
   const [ score, setScore ] = useState(0)
   const [ rows, setRows ] = useState(0)
   const [ level, setLevel ] = useState(0)
 
   const linePoints = [40, 100, 300, 1200]
+
+  useEffect(() => {
+    console.log('GETTING POINTS')
+    setOldPoints(GetPoints())
+  }, [])
 
   const calcScore = useCallback(() => {
     // We have score
@@ -20,5 +27,5 @@ export const useGameStatus = rowsCleared => {
     calcScore()
   }, [calcScore, rowsCleared, score])
 
-  return [score, setScore, rows, setRows, level, setLevel]
+  return [oldPoints, score, setScore, rows, setRows, level, setLevel]
 }

@@ -25,14 +25,17 @@ const NavigationMenu = () => {
 
     <ul className="navbar-nav mr-auto">
         <li> <Link to="/" className="nav-link">Home</Link></li>
-        {(!user ) && 
+        {(!user ) ?
         <><li> <Link to="/login" className="nav-link">Login</Link> {' '}</li>
         <li> <Link to="/signup" className="nav-link">SignUp</Link> </li>
         </>
-        }
+      :<>
         <li> <Link to="/tetris"className="nav-link" >Tetris!</Link> {' '}</li>
         <li><Link to="/profile" className="nav-link">Profile</Link> {' '}</li>
+        </>
+}
     </ul>
+   { (user ) && <span className="logginedIn">Welcome , {user.displayName}</span>}
     </div>
     </div>
     </nav>

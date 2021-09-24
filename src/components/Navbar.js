@@ -76,7 +76,7 @@ const Navbar = () => {
             name='login'
           >
             <Icon name='sign in alternate'/>
-            Sign in
+            Login
           </Menu.Item>
           <Menu.Item
             as={NavLink} exact to="/signup"

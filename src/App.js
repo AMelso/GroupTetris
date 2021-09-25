@@ -3,7 +3,8 @@ import {
   Route,
   Redirect
 } from 'react-router-dom'
-import { Home } from './components/Home'
+import { Home } from './components/Pages/Home'
+import { Upgrade } from './components/Pages/Upgrade'
 import { SignUp } from './components/authentication/SignUp'
 import { Login } from './components/authentication/Login'
 import  Navbar  from './components/navbar/Navbar'
@@ -49,9 +50,9 @@ const App = () => {
           <Navbar/>
           <AuthenticatedRoute exact path="/" component={Home} />
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
-          {/* <AuthenticatedRoute exact path="/profile" component={Profile} />
+          {/* <AuthenticatedRoute exact path="/profile" component={Profile} /> */}
           <AuthenticatedRoute exact path="/upgrade" component={Upgrade} />
-          <AuthenticatedRoute exact path="/leaderboard" component={Leaderboard} /> */}
+          {/* <AuthenticatedRoute exact path="/leaderboard" component={Leaderboard} /> */}
           <Route exact path="/signup" render={(props) => <SignUp {...props} />} />
 
           

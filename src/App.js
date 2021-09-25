@@ -9,6 +9,10 @@ import { SignUp } from './components/authentication/SignUp'
 import { Login } from './components/authentication/Login'
 import  Navbar  from './components/navbar/Navbar'
 import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
+import ProfilePage from './components/pages/Profile'
+import ChangePassword from './components/pages/ChangePassword'
+import LeaderBoard from './components/pages/LeaderBoard'
+
 import Tetris from './components/tetris/Tetris'
 // import TetrisDemo from './components/tetrisDemo/Tetris'
 
@@ -51,9 +55,10 @@ const App = () => {
           <Navbar/>
           <AuthenticatedRoute exact path="/" component={Home} />
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
-          {/* <AuthenticatedRoute exact path="/profile" component={Profile} /> */}
+          <AuthenticatedRoute exact path="/profile" component={ProfilePage} />
           <AuthenticatedRoute exact path="/upgrade" component={Upgrade} />
-          {/* <AuthenticatedRoute exact path="/leaderboard" component={Leaderboard} /> */}
+          <AuthenticatedRoute exact path="/leaderboard" component={LeaderBoard} />
+          <AuthenticatedRoute exact path="/change-password" component={ChangePassword}/>
           <Route exact path="/signup" render={(props) => <SignUp {...props} />} />
 
           

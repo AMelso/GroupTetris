@@ -51,8 +51,9 @@ const Tetris = () => {
     setGameOver(true)
     setDropTime(null)
     const points = oldPoints
+    console.log('END GAME: UPDATING SCORE ON FIREBASE')
     console.log('OLD POINTS: ', points, 'SCORE: ', score)
-    UpdatePoints(score)
+    UpdatePoints(points + score)
   }
 
   const drop = () => {
@@ -116,7 +117,8 @@ const Tetris = () => {
       // } else {
       //   setTotalPoints(score)
       // }
-      setTotalPoints(GetPoints() + score)
+      console.log('OLD POINTS OR SCORE CHANGED: ', oldPoints, score)
+      setTotalPoints(oldPoints + score)
     }
     updateTotalPoints()
   }, [oldPoints, score])

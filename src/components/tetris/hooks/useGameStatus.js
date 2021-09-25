@@ -12,6 +12,7 @@ export const useGameStatus = rowsCleared => {
   useEffect(() => {
     console.log('GETTING POINTS')
     setOldPoints(GetPoints())
+    console.log('USEGAMESTATUS RETRIEVED POINTS: ', oldPoints)
   }, [])
 
   const calcScore = useCallback(() => {

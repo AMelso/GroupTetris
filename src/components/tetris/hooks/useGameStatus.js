@@ -10,9 +10,14 @@ export const useGameStatus = rowsCleared => {
   const linePoints = [40, 100, 300, 1200]
 
   useEffect(() => {
-    console.log('GETTING POINTS')
-    setOldPoints(GetPoints())
-    console.log('USEGAMESTATUS RETRIEVED POINTS: ', oldPoints)
+    
+    const retrievePoints = async () => {
+      const points = await GetPoints()
+      // console.log('GETTING POINTS:', points)
+      setOldPoints(points)
+      // console.log('USEGAMESTATUS RETRIEVED POINTS: ', oldPoints)
+    }
+    retrievePoints()
   }, [])
 
   const calcScore = useCallback(() => {
@@ -28,5 +33,5 @@ export const useGameStatus = rowsCleared => {
     calcScore()
   }, [calcScore, rowsCleared, score])
 
-  return [oldPoints, score, setScore, rows, setRows, level, setLevel]
+  return [oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel]
 }

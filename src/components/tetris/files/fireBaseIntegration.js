@@ -9,11 +9,9 @@ onAuthStateChanged(auth, (user => {
 }))
 
 export const UpdatePoints = async (score) => {
-  const oldScore = await GetPoints()
-  const newScore = oldScore + score
   const updateRef = doc(db, "users", userUID)
   await updateDoc(updateRef, {
-    points: newScore
+    points: score
   })
 }
 
@@ -21,6 +19,6 @@ export const GetPoints = async () => {
   const docRef = doc(db, "users", userUID)
   const docSnap = await getDoc(docRef)
   const points = parseInt(docSnap.data().points)
-  console.log('RETRIEVED POINTS: ', points)
+  // console.log('RETRIEVED POINTS: ', points)
   return points
 }

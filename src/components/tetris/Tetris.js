@@ -24,7 +24,7 @@ const Tetris = () => {
 
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
-  const [ oldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
+  const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
   
 
   // console.log('re-render')
@@ -50,10 +50,9 @@ const Tetris = () => {
     // console.log('GAME OVER!!!')
     setGameOver(true)
     setDropTime(null)
-    const points = oldPoints
-    console.log('END GAME: UPDATING SCORE ON FIREBASE')
-    console.log('OLD POINTS: ', points, 'SCORE: ', score)
-    UpdatePoints(points + score)
+    // console.log('END GAME: UPDATING SCORE ON FIREBASE')
+    // console.log('OLD POINTS: ', oldPoints, 'SCORE: ', score, 'TOTAL: ', totalPoints)
+    UpdatePoints(totalPoints)
   }
 
   const drop = () => {
@@ -111,13 +110,7 @@ const Tetris = () => {
 
   useEffect(() => {
     const updateTotalPoints = () => {
-      // if (oldPoints > 0) {
-      //   console.log('OLD POINTS EXISTS: ', oldPoints)
-      //   setTotalPoints(oldPoints + score)
-      // } else {
-      //   setTotalPoints(score)
-      // }
-      console.log('OLD POINTS OR SCORE CHANGED: ', oldPoints, score)
+      // console.log('OLD POINTS OR SCORE CHANGED: ', oldPoints, score)
       setTotalPoints(oldPoints + score)
     }
     updateTotalPoints()

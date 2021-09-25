@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import bgImage from '../img/bg.png'
+// import bgImage from '../img/bg.png'
 
 // May need to adjust height here to work well with nav bar
 export const StyledTetrisWrapper = styled.div`

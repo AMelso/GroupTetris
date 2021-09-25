@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Image, Button, Card, Icon, Label, Divider, Grid, Segment } from 'semantic-ui-react'
+import { Container, Image, Button, Card, Icon, Label, Divider, Grid } from 'semantic-ui-react'
 import { useAuthState } from '../../firebase'
 
 

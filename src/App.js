@@ -10,7 +10,7 @@ import { Login } from './components/authentication/Login'
 import  Navbar  from './components/navbar/Navbar'
 import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
 import Tetris from './components/tetris/Tetris'
-import TetrisDemo from './components/tetrisDemo/Tetris'
+// import TetrisDemo from './components/tetrisDemo/Tetris'
 
 
 

@@ -68,7 +68,7 @@ const TetrisDemo = () => {
     
     let blank = true
     for (let y = 0; y < player.tetromino.length; y++) {
-        if (player.tetromino[y][0] != 0) {
+        if (player.tetromino[y][0] !== 0) {
             blank = false
         }
     }

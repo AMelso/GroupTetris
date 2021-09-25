@@ -9,9 +9,9 @@ import { SignUp } from './components/authentication/SignUp'
 import { Login } from './components/authentication/Login'
 import  Navbar  from './components/navbar/Navbar'
 import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
-import ProfilePage from './components/pages/Profile'
-import ChangePassword from './components/pages/ChangePassword'
-import LeaderBoard from './components/pages/LeaderBoard'
+import ProfilePage from './components/Pages/Profile'
+import ChangePassword from './components/Pages/ChangePassword'
+import LeaderBoard from './components/Pages/LeaderBoard'
 
 import Tetris from './components/tetris/Tetris'
 // import TetrisDemo from './components/tetrisDemo/Tetris'

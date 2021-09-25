@@ -8,7 +8,7 @@ import { SignUp } from './components/authentication/SignUp'
 import { Login } from './components/authentication/Login'
 import { AuthContextProvider, useAuthState } from './firebase' // set in ./firebase.js file
 import Tetris from './components/tetris/Tetris'
-import NavigationMenu from './components/pages/NavigationMenu'
+
 import ProfilePage from './components/pages/Profile'
 import ChangePassword from './components/pages/ChangePassword'
 import LeaderBoard from './components/pages/LeaderBoard'

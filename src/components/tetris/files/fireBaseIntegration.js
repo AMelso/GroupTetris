@@ -43,7 +43,10 @@ export const UpdateLeaderBoards = async (total, score) => {
   // Set the Individual Game points leaderboard entry IF it is >= current highscore
   const docRef = doc(db, "leaderboards/default/IndividualGamePoints", userUID)
   const docSnap = await getDoc(docRef)
-  const highscore = parseInt(docSnap.data().score)
+  let highscore = 0
+  if (docSnap.data().score) {
+    highscore = parseInt(docSnap.data().score)
+  }
   if (score >= highscore) {
     await setDoc(doc(db, 'leaderboards/default/IndividualGamePoints', userUID), {
       name: displayName,

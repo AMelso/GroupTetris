@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { createStage, checkCollision } from './files/gameHelpers'
-import { UpdatePoints, GetPoints } from './files/fireBaseIntegration'
+import { UpdatePoints, UpdateLeaderBoards } from './files/fireBaseIntegration'
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
@@ -53,6 +53,7 @@ const Tetris = () => {
     // console.log('END GAME: UPDATING SCORE ON FIREBASE')
     // console.log('OLD POINTS: ', oldPoints, 'SCORE: ', score, 'TOTAL: ', totalPoints)
     UpdatePoints(totalPoints)
+    UpdateLeaderBoards(totalPoints, score)
   }
 
   const drop = () => {

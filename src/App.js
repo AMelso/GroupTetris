@@ -11,7 +11,7 @@ import Tetris from './components/tetris/Tetris'
 import NavigationMenu from './components/pages/NavigationMenu'
 import ProfilePage from './components/pages/Profile'
 import ChangePassword from './components/pages/ChangePassword'
-import ScoreBoard from './components/pages/ScoreBoard'
+import LeaderBoard from './components/pages/LeaderBoard'
 
 
 
@@ -58,7 +58,7 @@ const App = () => {
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
           <AuthenticatedRoute exact path="/profile" component={ProfilePage} />
           <AuthenticatedRoute exact path="/change-password" component={ChangePassword}/>
-          <AuthenticatedRoute exact path="/score-board" component={ScoreBoard}/>
+          <AuthenticatedRoute exact path="/leader-board" component={LeaderBoard}/>
           <UnauthenticatedRoute exact path="/signup" component={SignUp} />
           <UnauthenticatedRoute exact path="/login" component={Login} />
           </div>

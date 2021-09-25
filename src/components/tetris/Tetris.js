@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { createStage, checkCollision } from './files/gameHelpers'
+import { UpdatePoints, GetPoints } from './files/fireBaseIntegration'
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
@@ -19,12 +20,14 @@ import StartButton from './StartButton'
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
   const [ gameOver, setGameOver ] = useState(false)
+  const [ totalPoints, setTotalPoints ] = useState(null)
 
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
-  const [ score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
+  const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
+  
 
-  console.log('re-render')
+  // console.log('re-render')
 
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: (dir), y: 0})) {
@@ -43,6 +46,15 @@ const Tetris = () => {
     setLevel(0)
   }
 
+  const endGame = () => {
+    // console.log('GAME OVER!!!')
+    setGameOver(true)
+    setDropTime(null)
+    // console.log('END GAME: UPDATING SCORE ON FIREBASE')
+    // console.log('OLD POINTS: ', oldPoints, 'SCORE: ', score, 'TOTAL: ', totalPoints)
+    UpdatePoints(totalPoints)
+  }
+
   const drop = () => {
     // Increase level when player has cleared 10 rows
     if (rows > (level + 1) * 10) {
@@ -56,9 +68,7 @@ const Tetris = () => {
     } else {
       // Game over
       if (player.pos.y < 1) {
-        console.log('GAME OVER!!!')
-        setGameOver(true)
-        setDropTime(null)
+        endGame()
       }
       updatePlayerPos({ x: 0, y: 0, collided: true })
     }
@@ -67,14 +77,14 @@ const Tetris = () => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        console.log('interval on')
+        // console.log('interval on')
         setDropTime(1000 / (level + 1) + 200)
       }
     }
   }
 
   const dropPlayer = () => {
-    console.log('interval off')
+    // console.log('interval off')
     setDropTime(null)
     drop()
   }
@@ -98,6 +108,14 @@ const Tetris = () => {
     drop();
   }, dropTime)
 
+  useEffect(() => {
+    const updateTotalPoints = () => {
+      // console.log('OLD POINTS OR SCORE CHANGED: ', oldPoints, score)
+      setTotalPoints(oldPoints + score)
+    }
+    updateTotalPoints()
+  }, [oldPoints, score])
+
   return (
     <StyledTetrisWrapper
         role="button" 
@@ -112,6 +130,7 @@ const Tetris = () => {
             <Display gameOver={gameOver} text="Game Over" />
           ) : (
             <div>
+              <Display text={`Total: ${totalPoints}`} />
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
               <Display text={`Level: ${level}`} />

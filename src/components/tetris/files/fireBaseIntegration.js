@@ -46,7 +46,7 @@ export const UpdateLeaderBoards = async (total, score) => {
   const docRef = doc(db, "leaderboards/default/IndividualGamePoints", userUID) // path to read
   const docSnap = await getDoc(docRef) // Get data from document userUID
   let highscore = 0
-  if (docSnap.data().score) { // Does a highscore already exist in docSnap?
+  if (docSnap.exists()) { // Does a highscore already exist in docSnap?
     highscore = parseInt(docSnap.data().score) // Set highscore to that score
   }
   if (score >= highscore) { // Is the current game's score higher than the pre-existing high score?

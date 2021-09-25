@@ -6,7 +6,7 @@ export const Home = () => {
   
   return (
     <>
-      <h1>Welcome {user?.email}</h1>
+      <h1>Welcome, {user?.displayName}<br/>Email: ({user?.email})</h1>
       <button onClick={() => signOut(getAuth())}>Sign out</button> 
       {/* Need to move Sign out button to NavBar */}
     </>

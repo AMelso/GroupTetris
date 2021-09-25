@@ -30,6 +30,7 @@ const ProfilePage = () => {
             return false;
         }
         try{
+            //updating the username and email using standard or prebuilt mehtod by firebase package library
             //if correct information entered on form then user can enter name and email 
             await updateProfile(user,{displayName:formData.fName,email:formData.email});
             //alllows user to update email

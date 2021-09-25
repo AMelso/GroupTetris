@@ -1,18 +1,27 @@
 import React,{useState} from 'react'
 import SidebarNav from './SidebarNav'
 import { Icon } from 'semantic-ui-react'
+import HighestScore from './GameScore/HighestScore'
+import TotalScore from './GameScore/TotalScore'
+import MyScore from './GameScore/MyScore'
 const LeaderBoard = () => {
   //set up score manually for now in const default Score List
+  //refers to "highest game score tab in the code"
   const defaultScores = [
-  {score:100,title:"Tetris Game Score"},
-  {score:80,title:"Tetris Game Score"},
-  {score:70,title:"Tetris Game Score"},
-  {score:25,title:"Tetris Game Score"},
-  {score:10,title:"Tetris Game Score"}
-
+  {score:100,name:"Debra"},
+  {score:80,name:"Bob"},
+  {score:70,name:"John"},
+  {score:25,name:"Jeny"},
+  {score:10,name:"Krish"}
 ]
 //when we will integrate firebase Api we ill use setGameScoreList function to propagate API
-  const[gameScoreList,setGameScoreList] = useState(defaultScores);
+  const[highestScoreList] = useState(defaultScores);
+  // refers to 'My highest games tab in the code"
+  const[myScoreList] =useState([{date:'2021-09-09 11:02:22',score:130},{date:'2021-09-10 01:02:22',score:120},{date:'2021-09-011 12:02:22',score:50}]);
+  //refers to "Total score tab in the code"
+  const[totalScoreList] =  useState([{name:'Mike',score:50},{name:'Herry',score:80},{name:'Debra',score:100},{name:'David',score:90}]);
+  // change step for tab related to className={activeStep}
+  const[activeStep,setStep] = useState(0);
   //we will connect firebase api here using useEffect and save api data response in setGameScoreList
     return (
       
@@ -23,27 +32,31 @@ const LeaderBoard = () => {
               <div className="col-md-12 text-center">
                   <h1>Leader Board</h1>
                 </div>
-          </div>
-    <div className="row justify-content-md-center mb-4">
-        <div className="col-md-10">
-            <ul className={"tetrisLeaderBoard"}>
-              {/* populated scores list dynamically from the state variable */}
-              {/* when we connect firebase api data we will just put api data in gameScoreList */}
-            { gameScoreList.map((score,index)=>
-              (
-                    <li key={index} 
-                      className={ index === 0  ? "row bg-success text-white" : 
-                      (index === 1 ? "row bg-warning text-white":(index === 2 ? "row bg-danger text-white":"row") )}
-                      >
-                        <span className="col-md-1"><label>{index+1}</label></span>
-                        <span className="col-md-10">{score.score}<br/>{score.title}</span>
-                        <span className="col-md-1"><Icon name='gamepad'/></span>
-                    </li>
-              ))}
-            </ul>
-          </div>
-    </div>
-	
+          </div>    
+          <div className="row">
+			<div className="col-md-12">
+				<nav className="sidebarnav">
+					<div className="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+						<a className={activeStep === 0 ? "nav-item nav-link active": "nav-item nav-link" } onClick={(e)=>{e.preventDefault(); setStep(0);}} href="/">Total Score</a>
+						<a  className={activeStep === 1 ? "nav-item nav-link active": "nav-item nav-link" } onClick={(e)=>{e.preventDefault(); setStep(1);}} href="/">Highest games</a>
+						<a className={activeStep === 2 ? "nav-item nav-link active": "nav-item nav-link" } onClick={(e)=>{e.preventDefault(); setStep(2);}} href="/">My highest games</a>
+					</div>
+				</nav>
+				<div className="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+					<div className={activeStep === 0 ? "tab-pane fade show active" : "tab-pane fade"}>
+                <TotalScore gameScoreList={totalScoreList}/>
+					</div>
+					<div className={activeStep === 1 ? "tab-pane fade show active" : "tab-pane fade"}>
+            <HighestScore gameScoreList={highestScoreList}/>
+					</div>
+					<div className={activeStep === 2 ? "tab-pane fade show active" : "tab-pane fade"}>
+            <MyScore gameScoreList={myScoreList}/>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+  
 </div>
 </div>
     )

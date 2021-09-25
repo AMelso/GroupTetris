@@ -58,7 +58,7 @@ const App = () => {
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
           <AuthenticatedRoute exact path="/profile" component={ProfilePage} />
           <AuthenticatedRoute exact path="/change-password" component={ChangePassword}/>
-          <AuthenticatedRoute exact path="/leader-board" component={LeaderBoard}/>
+          <AuthenticatedRoute exact path="/leaderboard" component={LeaderBoard}/>
           <UnauthenticatedRoute exact path="/signup" component={SignUp} />
           <UnauthenticatedRoute exact path="/login" component={Login} />
           </div>

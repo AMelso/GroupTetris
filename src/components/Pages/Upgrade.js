@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Image, Button, Card, Icon, Label, Divider, Grid } from 'semantic-ui-react'
 import { useAuthState } from '../../firebase'
+import { GetPoints, GetUpgrades, SaveUpgrade, SpendPoints } from './UpgradeFiles/UpgradesFirebase'
 
 
 
@@ -8,6 +9,20 @@ import { useAuthState } from '../../firebase'
 const UpgradeHeader = () => {
 
   const { user } = useAuthState() // Returns user object, can access user.UID from that.
+
+  // FOR TESTING PURPOSES
+  // useEffect(() => {
+  //   const test = async () => {
+  //     const points = await GetPoints()
+  //     console.log('POINTS: ', points)
+  //     await SpendPoints(100)
+  //     await SaveUpgrade('dropSpeed', 1)
+  //     const upgrades = await GetUpgrades()
+  //     console.log('UPGRADES: ', upgrades)
+  //   }
+  //   test()
+  // }, [])
+  // END TESTING
 
   return(
     <Grid columns='equal'>

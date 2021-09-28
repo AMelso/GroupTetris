@@ -42,7 +42,7 @@ const ProfilePage = () => {
             alert(e.message);
         }
         //It's dependecy variable for useCallback function in 'const handle submit'
-        },[formData,error]);
+        },[formData,defaultError,user]);
     return (
         <>
         {/* code from bootsnip UserProfile 2 */}

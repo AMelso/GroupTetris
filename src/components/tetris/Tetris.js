@@ -16,6 +16,7 @@ import { useGameStatus } from './hooks/useGameStatus'
 import Stage from './Stage'
 import Display from './Display'
 import StartButton from './StartButton'
+import { useAuthState } from '../../firebase'
 
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
@@ -25,7 +26,7 @@ const Tetris = () => {
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
   const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
-  
+  const { user } = useAuthState();
 
   // console.log('re-render')
 
@@ -36,6 +37,10 @@ const Tetris = () => {
   }
 
   const startGame = () => {
+    if(user?.displayName === null){
+      alert("You need to setup your profile name first!");
+      return false;
+    }
     // Reset everything
     setStage(createStage())
     setDropTime(1000)

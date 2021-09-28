@@ -10,9 +10,14 @@ onAuthStateChanged(auth, (user => {
   userName = user.displayName // Get user's display name
 }))
 
-// Update the total points in the userUID document in the users collection
+// Update the total points in the userUID document in the users collection for specific users who is
+//logged in 
 export const UpdatePoints = async (score) => {
+  // gets users by ID and then update records in firebase colleciton 
   const updateRef = doc(db, "users", userUID)
+  // await can be put in front of any asynchrouous function to push your code on that line until the 
+  //promises fullfulls then returns the result value
+  //await will hold the execution till we never get response or result
   await updateDoc(updateRef, {
     points: score
   })
@@ -20,9 +25,18 @@ export const UpdatePoints = async (score) => {
 
 // Get the total points in the userUID document in the users collection
 export const GetPoints = async () => {
+    // we are getting all files for a specific user from the firebase collection
   const docRef = doc(db, "users", userUID)
+  //got all document references from firebase by userID and repoplulating using getDoc method
   const docSnap = await getDoc(docRef) // Get the information out of the userUID document
-  const points = parseInt(docSnap.data().points) // Specifically get the points value
+  let points = 0;
+  //console.log(docSnap.data());
+  //We are checking the docSnap is getting earlier records from firebase or not
+  //If user will paly the first time this games then we will get undefined or null value from firebase so 
+  //We have checked he condtion  and handle error here.
+  if(docSnap.data()){
+    points = parseInt(docSnap.data().points) // Specifically get the points value
+  }
   // console.log('RETRIEVED POINTS: ', points)
   return points
 }

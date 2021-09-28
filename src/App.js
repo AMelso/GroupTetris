@@ -52,6 +52,7 @@ const App = () => {
   return (
     <AuthContextProvider>
       <Router>
+          <div className="container">
           <Navbar/>
           <AuthenticatedRoute exact path="/" component={Home} />
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
@@ -63,6 +64,7 @@ const App = () => {
 
           
           <UnauthenticatedRoute exact path="/login" component={Login} />
+          </div>
       </Router>
     </AuthContextProvider>
   )

@@ -2,6 +2,8 @@ import React,{useState,useCallback} from 'react'
 import { useAuthState } from '../../firebase';
 import {  updateProfile,updateEmail } from 'firebase/auth'
 import SidebarNav from './SidebarNav'
+import { updateUsername } from '../tetris/files/fireBaseIntegration';
+
 const ProfilePage = () => {
     //setting up error messages
     //fnError equals first name error
@@ -36,6 +38,7 @@ const ProfilePage = () => {
             //alllows user to update email
             await updateEmail(user,formData.email);
             //if email is updated then success message generated
+            updateUsername(formData.fName) // Change username on the tetris firebase backend
             alert("successfully updated your profile");
             //once profile info is updated then alert message "successfully updated profile"
         }catch(e){

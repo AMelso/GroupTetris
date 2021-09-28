@@ -63,3 +63,7 @@ export const UpdateLeaderBoards = async (total, score) => {
     timestamp: serverTimestamp()
   })
 }
+
+export const updateUsername = (name) => {
+  userName = name
+}

@@ -25,7 +25,7 @@ const Tetris = () => {
 
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
-  const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
+  const [ oldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
   const { user } = useAuthState();
 
   // console.log('re-render')
@@ -37,10 +37,10 @@ const Tetris = () => {
   }
 
   const startGame = () => {
-    if(user?.displayName === null){
+   /* if(user?.displayName === null){
       alert("You need to setup your profile name first!");
       return false;
-    }
+    }*/
     // Reset everything
     setStage(createStage())
     setDropTime(1000)

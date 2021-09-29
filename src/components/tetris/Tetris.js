@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { createStage, checkCollision } from './files/gameHelpers'
-import { UpdatePoints, UpdateLeaderBoards } from './files/fireBaseIntegration'
+import { UpdatePoints, UpdateLeaderBoards, GetLookAhead } from './files/fireBaseIntegration'
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
@@ -116,6 +116,15 @@ const Tetris = () => {
     }
     updateTotalPoints()
   }, [oldPoints, score])
+
+  // Get the look ahead level
+  useEffect(() => {
+    const retrieveLookAhead = async () => { // must be async to work properly
+      const lookAheadLevel = await GetLookAhead()
+      console.log('LOOK AHEAD LEVEL: ', lookAheadLevel)
+    }
+    retrieveLookAhead()
+  }, [])
 
   return (
     <StyledTetrisWrapper

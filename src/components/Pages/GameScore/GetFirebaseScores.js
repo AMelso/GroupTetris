@@ -5,7 +5,9 @@ const db = getFirestore()
 const auth = getAuth()
 let userUID = ''
 onAuthStateChanged(auth, (user => {
-  userUID = user.uid // Get user's UID
+  if (user) {
+    userUID = user.uid // Get user's UID
+  }
 }))
 
 export const GetTotalScores = async () => {

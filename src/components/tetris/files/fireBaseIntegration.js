@@ -2,12 +2,16 @@ import { getFirestore, doc, updateDoc, getDoc, setDoc, addDoc, serverTimestamp, 
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 const db = getFirestore()
 
+
 const auth = getAuth()
 let userUID = ''
 let userName = ''
 onAuthStateChanged(auth, (user => {
-  userUID = user.uid // Get user's UID
-  userName = user.displayName // Get user's display name
+
+  if (user) {
+    userUID = user.uid // Get user's UID
+    userName = user.displayName // Get user's display name
+  }
 }))
 
 // Update the total points in the userUID document in the users collection

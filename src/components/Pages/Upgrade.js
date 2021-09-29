@@ -24,6 +24,17 @@ const UpgradeHeader = () => {
   // }, [])
   // END TESTING
 
+  useEffect(() => {
+    const points = async () => {
+    
+      const totalPoints = await GetPoints()
+      console.log(totalPoints)
+    }
+    points()
+  }, [])
+
+  
+
   return(
     <Grid columns='equal'>
       {/* column 1 */}
@@ -32,7 +43,7 @@ const UpgradeHeader = () => {
       </Grid.Column>
       {/* column 2 */}
       <Grid.Column>
-        Points: 5000
+        Points: 
       </Grid.Column>
     </Grid>
   )

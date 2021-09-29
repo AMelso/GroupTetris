@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Image, Button, Card, Icon, Label, Divider, Grid } from 'semantic-ui-react'
 import { useAuthState } from '../../firebase'
 import { GetPoints, GetUpgrades, SaveUpgrade, SpendPoints } from './UpgradeFiles/UpgradesFirebase'
+import { LookAheadUpgradeCard } from './UpgradeFiles/LookAhead'
+import { DropSpeedUpgradeCard } from './UpgradeFiles/DropSpeed'
+import { DemolitionChargeUpgradeCard } from './UpgradeFiles/DemolitionCharge'
 
 
 
@@ -9,6 +12,8 @@ import { GetPoints, GetUpgrades, SaveUpgrade, SpendPoints } from './UpgradeFiles
 const UpgradeHeader = () => {
 
   const { user } = useAuthState() // Returns user object, can access user.UID from that.
+
+  const [pointsToSpend, setPointsToSpend] = useState(0);
 
   // FOR TESTING PURPOSES
   // useEffect(() => {
@@ -24,13 +29,15 @@ const UpgradeHeader = () => {
   // }, [])
   // END TESTING
 
+
+  // pull in user points from firebase. GetPoints db call from UpgradesFirebase.js
   useEffect(() => {
-    const points = async () => {
+    const userAvailablePoints = async () => {
     
-      const totalPoints = await GetPoints()
-      console.log(totalPoints)
+      const availablePoints = await GetPoints()
+      setPointsToSpend(availablePoints)
     }
-    points()
+    userAvailablePoints()
   }, [])
 
   
@@ -43,13 +50,13 @@ const UpgradeHeader = () => {
       </Grid.Column>
       {/* column 2 */}
       <Grid.Column>
-        Points: 
+        Points: {pointsToSpend}
       </Grid.Column>
     </Grid>
   )
 }
 
-// a container < that contains a row < of columns which are the upgrade cards
+// a container < that contains a row < of columns which have individual upgrade card components imported
 const UpgradeCards = () => {
 
   return(
@@ -58,89 +65,17 @@ const UpgradeCards = () => {
 
         {/* 1st upgrade card */}
         <Grid.Column>
-          <Card>
-            <Image src="https://www.pikpng.com/pngl/m/576-5768393_transparent-clipart-crystal-ball-png-download.png" />
-            <Card.Content>
-              <Card.Header>Fore Sight</Card.Header>
-              <Card.Meta>
-                <span className='level'>Current level: </span>
-              </Card.Meta>
-              <Card.Description>
-                Each upgrade grants 1 additional future piece to be seen.
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <div className='button'>
-                <Button as='div' labelPosition='left'>
-                  <Label basic pointing='right'>
-                    Upgrade:
-                  </Label>
-                  <Button icon>
-                    <Icon name='arrow alternate circle up outline' />
-                    Dynamic Cost
-                  </Button>
-                </Button>
-              </div>
-            </Card.Content>
-          </Card>
+          <LookAheadUpgradeCard />
         </Grid.Column>
 
         {/* 2nd upgrade card */}
         <Grid.Column>
-          <Card>
-            <Image src="" />
-            <Card.Content>
-              <Card.Header>Bomb</Card.Header>
-              <Card.Meta>
-                <span className='level'>Current level: </span>
-              </Card.Meta>
-              <Card.Description>
-                Each upgrade increases the bombs blast radius.
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <div className='button'>
-                <Button as='div' labelPosition='left'>
-                  <Label basic pointing='right'>
-                    Upgrade:
-                  </Label>
-                  <Button icon>
-                    <Icon name='arrow alternate circle up outline' />
-                    Dynamic Cost
-                  </Button>
-                </Button>
-              </div>
-            </Card.Content>
-          </Card>
+          <DropSpeedUpgradeCard />
         </Grid.Column>
 
         {/* 3rd upgrade card */}
         <Grid.Column>
-          <Card>
-            <Image src="" />
-            <Card.Content>
-              <Card.Header>upgrade 3</Card.Header>
-              <Card.Meta>
-                <span className='level'>Current level: </span>
-              </Card.Meta>
-              <Card.Description>
-                desc.
-              </Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-              <div className='button'>
-                <Button as='div' labelPosition='left'>
-                  <Label basic pointing='right'>
-                    Upgrade:
-                  </Label>
-                  <Button icon>
-                    <Icon name='arrow alternate circle up outline' />
-                    Dynamic Cost
-                  </Button>
-                </Button>
-              </div>
-            </Card.Content>
-          </Card>
+          <DemolitionChargeUpgradeCard />
         </Grid.Column>
 
       </Grid>

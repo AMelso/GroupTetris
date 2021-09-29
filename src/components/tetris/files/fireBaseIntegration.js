@@ -67,3 +67,13 @@ export const UpdateLeaderBoards = async (total, score) => {
 export const updateUsername = (name) => {
   userName = name
 }
+
+export const GetLookAhead = async () => {
+  const docRef = doc(db, `users/${userUID}/upgrades`, 'lookAhead')
+  const docSnap = await getDoc(docRef) // Get the information out of the lookAhead document
+  let lookAheadLevel = 0 // Set lookAheadLevel to 0 by default
+  if (docSnap.exists) { // If docSnap exists then...
+    lookAheadLevel = parseInt(docSnap.data().level) // Change lookAheadLevel to the value for level on db
+  }
+  return lookAheadLevel
+}

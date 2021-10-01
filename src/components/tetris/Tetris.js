@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 import { createStage, checkCollision } from './files/gameHelpers'
-import { UpdatePoints, UpdateLeaderBoards, GetLookAhead } from './files/fireBaseIntegration'
+import { UpdatePoints, UpdateLeaderBoards } from './files/fireBaseIntegration'
+import { GetUpgrades } from '../Pages/UpgradeFiles/UpgradesFirebase'
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
@@ -117,13 +118,13 @@ const Tetris = () => {
     updateTotalPoints()
   }, [oldPoints, score])
 
-  // Get the look ahead level
+  // Get the upgrades
   useEffect(() => {
-    const retrieveLookAhead = async () => { // must be async to work properly
-      const lookAheadLevel = await GetLookAhead()
-      console.log('LOOK AHEAD LEVEL: ', lookAheadLevel)
+    const retrieveUpgrades = async () => { // must be async to work properly
+      const upgrades = await GetUpgrades()
+      console.log('LOOK AHEAD LEVEL: ', upgrades.lookAhead)
     }
-    retrieveLookAhead()
+    retrieveUpgrades()
   }, [])
 
   return (

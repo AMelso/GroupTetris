@@ -24,7 +24,7 @@ const TetrisDemo = () => {
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
   const [ score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
 
-  console.log('re-render')
+  //console.log('re-render')
 
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: (dir), y: 0})) {
@@ -49,7 +49,7 @@ const TetrisDemo = () => {
     } else {
       // Game over
       if (player.pos.y < 1) {
-        console.log('GAME OVER!!!')
+        //console.log('GAME OVER!!!')
         setGameOver(true)
         setDropTime(null)
       }
@@ -59,7 +59,7 @@ const TetrisDemo = () => {
 
   const autoPlay = async () => {
     let move = await AI(player, stage)
-    console.log(move[1])
+    //console.log(move[1])
     if (move[1] !== 0) {
       for (let x = move[1]; x > 0; x--) {
         playerRotate(stage, 1)

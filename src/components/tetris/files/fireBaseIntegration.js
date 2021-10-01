@@ -2,6 +2,7 @@ import { getFirestore, doc, updateDoc, getDoc, setDoc, addDoc, serverTimestamp, 
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 const db = getFirestore()
 
+
 const auth = getAuth()
 let userUID = ''
 let userName = ''
@@ -76,4 +77,8 @@ export const UpdateLeaderBoards = async (total, score) => {
     score: score,
     timestamp: serverTimestamp()
   })
+}
+
+export const updateUsername = (name) => {
+  userName = name
 }

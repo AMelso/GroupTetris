@@ -14,6 +14,9 @@ import ChangePassword from './components/Pages/ChangePassword'
 import LeaderBoard from './components/Pages/LeaderBoard'
 
 import Tetris from './components/tetris/Tetris'
+import Forum from './components/Pages/Forum'
+import AddForum from './components/Pages/AddForum'
+import EditForum from './components/Pages/EditForum'
 // import TetrisDemo from './components/tetrisDemo/Tetris'
 
 
@@ -56,6 +59,9 @@ const App = () => {
           <Navbar/>
           <AuthenticatedRoute exact path="/" component={Home} />
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
+          <AuthenticatedRoute exact path="/forum/add" component={AddForum} />
+          <AuthenticatedRoute exact path="/forum/:id/edit" component={EditForum} />
+          <AuthenticatedRoute exact path="/forum" component={Forum} />
           <AuthenticatedRoute exact path="/profile" component={ProfilePage} />
           <AuthenticatedRoute exact path="/upgrade" component={Upgrade} />
           <AuthenticatedRoute exact path="/leaderboard" component={LeaderBoard} />

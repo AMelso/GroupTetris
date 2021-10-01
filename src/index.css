@@ -1,7 +1,14 @@
 body {
   margin: 0;
 }
-
+span.controls i {
+  margin: 5px 5px;
+  cursor: pointer;
+}
+.mb30{padding-bottom: 15px;}
+span.controls i.trash {
+  color: #f31919;
+}
 span.logginedIn {
   min-width: 222px;
   color: #fff;

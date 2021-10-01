@@ -5,6 +5,7 @@ import { UpdatePoints, UpdateLeaderBoards } from './files/fireBaseIntegration'
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
+import { TETROMINOS } from './files/tetrominos'
 
 // Custom Hooks
 import { useInterval } from './hooks/useInterval'
@@ -16,6 +17,7 @@ import { useGameStatus } from './hooks/useGameStatus'
 import Stage from './Stage'
 import Display from './Display'
 import StartButton from './StartButton'
+import Lookahead from './Lookahead'
 
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
@@ -26,9 +28,6 @@ const Tetris = () => {
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
   const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
   
-
-  // console.log('re-render')
-
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: (dir), y: 0})) {
       updatePlayerPos({ x: dir, y: 0 })
@@ -44,6 +43,7 @@ const Tetris = () => {
     setScore(0)
     setRows(0)
     setLevel(0)
+    //console.log("Player Tetromino:", player.tetromino)
   }
 
   const endGame = () => {
@@ -98,6 +98,7 @@ const Tetris = () => {
         movePlayer(1)
       } else if (keyCode === 40) {
         dropPlayer()
+        console.log(TETROMINOS[player.queue[1]].shape)
       } else if (keyCode === 38) {
         playerRotate(stage, 1)
       }
@@ -134,7 +135,7 @@ const Tetris = () => {
               <Display text={`Total: ${totalPoints}`} />
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
-              <Display text={`Level: ${level}`} />
+              <Lookahead tetrominos={TETROMINOS[player.queue[1]].shape} />
             </div>
           )}
           <StartButton callback={startGame} />

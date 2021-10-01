@@ -59,9 +59,9 @@ export const TETROMINOS = {
 }
 
 // Here we can modify what pieces are available/get thrown out onto the stage
-export const randomTetromino = () => {
-  const tetrominos = 'IJLOSTZ'
-  const randTetromino = 
-    tetrominos[Math.floor(Math.random() * tetrominos.length)]
-  return TETROMINOS[randTetromino]
-}
+// export const randomTetromino = () => {
+//   const tetrominos = 'IJLOSTZ'
+//   const randTetromino = 
+//     tetrominos[Math.floor(Math.random() * tetrominos.length)]
+//   return TETROMINOS[randTetromino]
+// }

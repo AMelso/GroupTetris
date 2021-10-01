@@ -7,6 +7,7 @@ import { GetUpgrades } from '../Pages/UpgradeFiles/UpgradesFirebase'
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
 import { TETROMINOS } from './files/tetrominos'
+import { Grid } from './styles/StyledLookahead'
 
 // Custom Hooks
 import { useInterval } from './hooks/useInterval'
@@ -142,14 +143,31 @@ const Tetris = () => {
             <Display gameOver={gameOver} text="Game Over" />
           ) : (
             <div>
+              <div>
               <Display text={`Total: ${totalPoints}`} />
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
-              <Lookahead tetrominos={TETROMINOS[player.queue[1]].shape} />
+              </div>
             </div>
           )}
           <StartButton callback={startGame} />
         </aside>
+        <asideLookahead>
+          { gameOver ? (
+            // We may want to keep score/rows/level displayed even after game over. This code hides them.
+            <Display gameOver={gameOver} text="Game Over" />
+          ) : (
+              <Grid>
+              <label style={{ color: 'white', fontFamily: 'Pixel', fontSize: '0.8rem'}} for="next" color="white">Next Pieces</label>
+              <Lookahead id="next" tetrominos={TETROMINOS[player.queue[1]].shape} />
+              <Lookahead tetrominos={TETROMINOS[player.queue[2]].shape} />
+              <Lookahead tetrominos={TETROMINOS[player.queue[3]].shape} />
+              <Lookahead tetrominos={TETROMINOS[player.queue[4]].shape} />
+              <Lookahead tetrominos={TETROMINOS[player.queue[5]].shape} />
+              </Grid>
+          )}
+          
+        </asideLookahead>
       </StyledTetris>
     </StyledTetrisWrapper>
   )

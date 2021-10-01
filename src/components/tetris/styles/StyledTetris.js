@@ -24,4 +24,11 @@ export const StyledTetris = styled.div`
     display: block;
     padding: 0 20px;
   }
+
+  asideLookahead {
+    width: 100%;
+    max-width: 180px;
+    display: block;
+    padding: 0 20px;
+  }
 `

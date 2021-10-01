@@ -6,7 +6,7 @@ import Cell from './Cell'
 
 const Lookahead = ({ tetrominos }) => (
   <StyledLookahead width={tetrominos[0].length} height={tetrominos.length}>
-    {tetrominos.map(row => row.map((cell, x) => <Cell key={x} type={cell} />))}   
+    {tetrominos.map(row => row.map((cell, x) => <Cell key={x} type={cell} /> ))}   
   </StyledLookahead>
 )
 

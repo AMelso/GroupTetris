@@ -8,7 +8,7 @@ const auth = getAuth()
 let userUID = ''
 onAuthStateChanged(auth, (user => {
   // get userID
-  userUID = user.uid // Get user's UID
+   userUID = user ? user.uid : '' // Get user's UID
 }))
 
 // Leaderboard Total Score

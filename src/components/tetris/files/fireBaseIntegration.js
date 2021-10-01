@@ -6,8 +6,8 @@ const auth = getAuth()
 let userUID = ''
 let userName = ''
 onAuthStateChanged(auth, (user => {
-  userUID = user.uid // Get user's UID
-  userName = user.displayName // Get user's display name
+  userUID = user ? user.uid : '' // Get user's UID
+  userName = user ? user.displayName : ''// Get user's display name
 }))
 
 // Update the total points in the userUID document in the users collection for specific users who is

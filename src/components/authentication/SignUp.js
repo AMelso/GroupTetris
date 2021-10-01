@@ -1,5 +1,5 @@
 import { useCallback } from 'react' // DOC: https://reactjs.org/docs/hooks-reference.html#usecallback
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged,updateProfile} from 'firebase/auth'
 import { getFirestore, doc, setDoc } from "firebase/firestore"
 import { Button, Form } from 'semantic-ui-react'
 
@@ -11,7 +11,7 @@ export const SignUp = (props) => {
     const db = getFirestore()
 
     // takes 3 elements passed into handleSubmit
-    const { email, password, password2 } = e.target.elements
+    const { email,display, password, password2 } = e.target.elements
     const auth = getAuth() // DOC: https://firebase.google.com/docs/reference/unity/class/firebase/auth/firebase-auth
 
     // if passwords are equal, attempt to create new user on db
@@ -19,6 +19,12 @@ export const SignUp = (props) => {
       try {
         const newUser = await createUserWithEmailAndPassword(auth, email.value, password.value) // Attempt to create new user
         console.log('USER: ', newUser.user.uid)
+        onAuthStateChanged(auth, (async (user) => {
+          if (user) {
+            await updateProfile(user, {displayName: display.value})
+            console.log('Profile updated with new displayname')
+          }
+        }))
         await setDoc(doc(db, "users", newUser.user.uid), {
           points: 0,
         })
@@ -41,6 +47,14 @@ export const SignUp = (props) => {
               name="email"
               placeholder="Email"
               type="email"
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Display Name</label>
+            <input
+              name="display"
+              placeholder="Display Name"
+              type="text"
             />
           </Form.Field>
           <Form.Field>

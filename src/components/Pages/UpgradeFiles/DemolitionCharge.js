@@ -8,14 +8,14 @@ const data = () => {
   </>
 }
 
-const DemolitionChargeCard = () => {
+export const DemolitionChargeCard = (props) => {
   return(
     <Card>
       <Image src="https://www.pikpng.com/pngl/m/576-5768393_transparent-clipart-crystal-ball-png-download.png" />
       <Card.Content>
         <Card.Header>Demolition Charge</Card.Header>
         <Card.Meta>
-          <span className='level'>Current level: </span>
+          <span className='level'>Current level: {props.demolitionChargeLevel}</span>
         </Card.Meta>
         <Card.Description>
           Level 1 grants access to a Demolition Charge every 90seconds, which clears the bottom row.
@@ -39,10 +39,3 @@ const DemolitionChargeCard = () => {
   )
 }
 
-export const DemolitionChargeUpgradeCard = () => {
-  return(
-    <>
-    {DemolitionChargeCard()}
-    </>
-  )
-}

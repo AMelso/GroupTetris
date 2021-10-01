@@ -3,22 +3,20 @@ import { Container, Image, Button, Card, Icon, Label, Divider, Grid } from 'sema
 import { useAuthState } from '../../../firebase'
 import { GetPoints, GetUpgrades, SaveUpgrade, SpendPoints } from './UpgradesFirebase'
 
-const data = () => {
-  return <>
-  </>
-}
 
-const LookAheadCard = () => {
+
+export const LookAheadCard = (props) => {
   return(
     <Card>
       <Image src="https://www.pikpng.com/pngl/m/576-5768393_transparent-clipart-crystal-ball-png-download.png" />
       <Card.Content>
         <Card.Header>Fore Sight</Card.Header>
         <Card.Meta>
-          <span className='level'>Current level: </span>
+        {/* call function to grab int level */}
+          <span className='level'>Current level: {props.lookAheadLevel}</span> 
         </Card.Meta>
         <Card.Description>
-          Each upgrade grants 1 additional future piece to be seen.
+        Each upgrade grants 1 additional future piece to be seen.
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
@@ -35,13 +33,5 @@ const LookAheadCard = () => {
         </div>
       </Card.Content>
     </Card>
-  )
-}
-
-export const LookAheadUpgradeCard = () => {
-  return(
-    <>
-    {LookAheadCard()}
-    </>
   )
 }

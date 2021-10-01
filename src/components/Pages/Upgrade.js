@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Container, Image, Button, Card, Icon, Label, Divider, Grid } from 'semantic-ui-react'
 import { useAuthState } from '../../firebase'
 import { GetPoints, GetUpgrades, SaveUpgrade, SpendPoints } from './UpgradeFiles/UpgradesFirebase'
-import { LookAheadUpgradeCard } from './UpgradeFiles/LookAhead'
-import { DropSpeedUpgradeCard } from './UpgradeFiles/DropSpeed'
-import { DemolitionChargeUpgradeCard } from './UpgradeFiles/DemolitionCharge'
+import { LookAheadCard } from './UpgradeFiles/LookAhead'
+import { DropSpeedCard } from './UpgradeFiles/DropSpeed'
+import { DemolitionChargeCard } from './UpgradeFiles/DemolitionCharge'
 
 
 
@@ -59,23 +59,80 @@ const UpgradeHeader = () => {
 // a container < that contains a row < of columns which have individual upgrade card components imported
 const UpgradeCards = () => {
 
+  // Get upgrade levels from database
+  // return upgrade cards with level data
+  
+
+  // get user
+  const { user } = useAuthState() // Returns user object, can access user.UID from that.
+
+  // establish state to set the level, Levels will be the state int
+  const [lookAheadLevel, setlookAheadLevel] = useState(0);
+  const [dropSpeedLevel, setdropSpeedLevel] = useState(0);
+  const [demolitionChargeLevel, setdemolitionChargeLevel] = useState(0);
+
+
+  // pull in upgrade levels from firebase. GetUpgrades db call from UpgradesFirebase.js
+  useEffect(() => {
+
+    // main function to call the database
+    const upgradeLevelsImport = async () => {
+    
+      // create variable to store level, calls GetUpgrades
+      const upgradeLevels = await GetUpgrades();
+    
+      // lookAhead upgrade
+
+      // if the user doesn't have the data in the database, set to level 0
+      if (upgradeLevels['lookAhead'] === undefined) {
+        setlookAheadLevel(0)
+        // if it exists, set the level in state to the value from the db.
+      } else {
+        setlookAheadLevel(upgradeLevels['lookAhead'])
+      }
+
+      // dropSpeed upgrade
+      
+      // if the user doesn't have the data in the database, set to level 0
+      if (upgradeLevels['dropSpeed'] === undefined) {
+        setdropSpeedLevel(0)
+        // if it exists, set the level in state to the value from the db.
+      } else {
+        setdropSpeedLevel(upgradeLevels['dropSpeed'])
+      }
+
+      // demolitionCharge upgrade
+      
+      // if the user doesn't have the data in the database, set to level 0
+      if (upgradeLevels['demolitionCharge'] === undefined) {
+        setdemolitionChargeLevel(0)
+        // if it exists, set the level in state to the value from the db.
+      } else {
+        setdemolitionChargeLevel(upgradeLevels['demolitionCharge'])
+      }
+    }
+    // call the function to complete the promise
+    upgradeLevelsImport()
+
+  }, [])
+
   return(
     <Container>
       <Grid columns='equal'>
 
         {/* 1st upgrade card */}
         <Grid.Column>
-          <LookAheadUpgradeCard />
+          <LookAheadCard lookAheadLevel={lookAheadLevel}/>
         </Grid.Column>
 
         {/* 2nd upgrade card */}
         <Grid.Column>
-          <DropSpeedUpgradeCard />
+          <DropSpeedCard dropSpeedLevel={dropSpeedLevel}/>
         </Grid.Column>
 
         {/* 3rd upgrade card */}
         <Grid.Column>
-          <DemolitionChargeUpgradeCard />
+          <DemolitionChargeCard demolitionChargeLevel={demolitionChargeLevel}/>
         </Grid.Column>
 
       </Grid>

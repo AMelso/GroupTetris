@@ -3,19 +3,16 @@ import { Container, Image, Button, Card, Icon, Label, Divider, Grid } from 'sema
 import { useAuthState } from '../../../firebase'
 import { GetPoints, GetUpgrades, SaveUpgrade, SpendPoints } from './UpgradesFirebase'
 
-const data = () => {
-  return <>
-  </>
-}
 
-const DropSpeedCard = () => {
+
+export const DropSpeedCard = (props) => {
   return(
     <Card>
       <Image src="https://www.pikpng.com/pngl/m/576-5768393_transparent-clipart-crystal-ball-png-download.png" />
       <Card.Content>
         <Card.Header>Time Dilation</Card.Header>
         <Card.Meta>
-          <span className='level'>Current level: </span>
+          <span className='level'>Current level: {props.dropSpeedLevel}</span>
         </Card.Meta>
         <Card.Description>
           Each upgrade distorts time, causing tetramino's to fall to earth slower.
@@ -35,13 +32,5 @@ const DropSpeedCard = () => {
         </div>
       </Card.Content>
     </Card>
-  )
-}
-
-export const DropSpeedUpgradeCard = () => {
-  return(
-    <>
-    {DropSpeedCard()}
-    </>
   )
 }

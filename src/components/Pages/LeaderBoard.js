@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react'
 import SidebarNav from './SidebarNav'
-import { Icon } from 'semantic-ui-react'
 import HighestScore from './GameScore/HighestScore'
 import TotalScore from './GameScore/TotalScore'
 import MyScore from './GameScore/MyScore'
@@ -9,13 +8,6 @@ import { GetHighestScores, GetMyScores, GetTotalScores } from './GameScore/GetFi
 const LeaderBoard = () => {
   //set up score manually for now in const default Score List
   //refers to "highest game score tab in the code"
-  const defaultScores = [
-  {score:100,name:"Debra"},
-  {score:80,name:"Bob"},
-  {score:70,name:"John"},
-  {score:25,name:"Jeny"},
-  {score:10,name:"Krish"}
-]
 //when we will integrate firebase Api we ill use setGameScoreList function to propagate API
   const[ highestScoreList, setHighestScoreList ] = useState([]);
   // refers to 'My highest games tab in the code"

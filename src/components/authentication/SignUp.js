@@ -1,5 +1,5 @@
 import { useCallback } from 'react' // DOC: https://reactjs.org/docs/hooks-reference.html#usecallback
-import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged,updateProfile} from 'firebase/auth'
 import { getFirestore, doc, setDoc } from "firebase/firestore"
 import { Button, Form } from 'semantic-ui-react'
 
@@ -11,14 +11,14 @@ export const SignUp = (props) => {
     const db = getFirestore()
 
     // takes 3 elements passed into handleSubmit
-    const { email, display, password, password2 } = e.target.elements
+    const { email,display, password, password2 } = e.target.elements
     const auth = getAuth() // DOC: https://firebase.google.com/docs/reference/unity/class/firebase/auth/firebase-auth
 
     // if passwords are equal, attempt to create new user on db
     if (password.value === password2.value)
       try {
         const newUser = await createUserWithEmailAndPassword(auth, email.value, password.value) // Attempt to create new user
-        console.log('New user created')
+        console.log('USER: ', newUser.user.uid)
         onAuthStateChanged(auth, (async (user) => {
           if (user) {
             await updateProfile(user, {displayName: display.value})

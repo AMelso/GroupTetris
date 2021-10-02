@@ -19,7 +19,11 @@ import { useGameStatus } from './hooks/useGameStatus'
 import Stage from './Stage'
 import Display from './Display'
 import StartButton from './StartButton'
+<<<<<<< HEAD
+import { useAuthState } from '../../firebase'
+=======
 import Lookahead from './Lookahead'
+>>>>>>> Development
 
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
@@ -29,8 +33,16 @@ const Tetris = () => {
 
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
+<<<<<<< HEAD
+  const [ oldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
+  const { user } = useAuthState();
+
+  // console.log('re-render')
+
+=======
   const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
   
+>>>>>>> Development
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: (dir), y: 0})) {
       updatePlayerPos({ x: dir, y: 0 })
@@ -38,6 +50,10 @@ const Tetris = () => {
   }
 
   const startGame = () => {
+   /* if(user?.displayName === null){
+      alert("You need to setup your profile name first!");
+      return false;
+    }*/
     // Reset everything
     setStage(createStage())
     setDropTime(1000)

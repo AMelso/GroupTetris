@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { Upgrade } from '../Upgrade'
 
 
+
 import {useState, useEffect} from "react"
 
 
@@ -58,6 +59,7 @@ export const SpendPoints = async (cost) => { // cost needs to be a positive inte
   await updateDoc(pointsRef, {
     points: increment(-cost) // remove cost value from points
   })
+  
 
 }
 

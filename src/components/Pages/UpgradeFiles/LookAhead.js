@@ -3,6 +3,7 @@ import { Container, Image, Button, Card, Icon, Label, Divider, Grid } from 'sema
 import { useAuthState } from '../../../firebase'
 import { GetPoints, GetUpgrades, SaveUpgrade, SpendPoints } from './UpgradesFirebase'
 import {UpgradeCards} from '../Upgrade'
+import crystalBall from '../../../img/crystal_ball.jpeg'
 
 
 
@@ -15,7 +16,6 @@ export const LookAheadCard = (props) => {
   const UpgradeClick = () => {
     SaveUpgrade(upgradeName,level,cost)
     props.updateLevelState(upgradeName, level)
-    // UpgradeCards()
   }
 
   //UPGRADE COST LOGIC
@@ -30,14 +30,28 @@ export const LookAheadCard = (props) => {
 
   // assign to a variable, which adds 1 to the current level from props
   // if current level is 5, set upgradeToLevel as 6, over max, cant do, handled below
-  if (props.lookAheadLevel >= 5) {
+  
+  var level = (1 + props.lookAheadLevel)
+  var cost = parseInt(upgradeToLevelCost[level])
+  var points = parseInt(props.pointsToSpend)
+  var short = cost - points
+
+  if (level > 5) {
     var upgradeButton = 
       "Max Level"
+  } else if (cost > points){
+    var upgradeButton = 
+    <div className='button'>
+      <Button as='div' labelPosition='left'>
+        <Label basic pointing='right'>
+          {/* // pass in next level */}
+          Upgrade: {level}: Requires {short} more.
+        </Label>
+      </Button>
+    </div>
   } else {
-    var level = (1 + props.lookAheadLevel)
-    // set cost to upgrade level cost in level object of level:cost
-    // then render upgrade button.
-    var cost = upgradeToLevelCost[level]
+      // set UpgradeCost to upgrade level cost in upgradeToLevel object of level:cost
+      // then render upgrade button.
     var upgradeButton = 
     <div className='button'>
       <Button as='div' labelPosition='left'>
@@ -53,11 +67,12 @@ export const LookAheadCard = (props) => {
       </Button>
     </div>
   }
+    
     //////// End upgrade Cost logic
 
   return(
     <Card>
-      <Image src="https://www.pikpng.com/pngl/m/576-5768393_transparent-clipart-crystal-ball-png-download.png" />
+      <Image src={crystalBall} alt="Crystal Ball" height="232px" />
       <Card.Content>
         <Card.Header>Fore Sight</Card.Header>
         <Card.Meta>
@@ -65,7 +80,12 @@ export const LookAheadCard = (props) => {
           <span className='level'>Current level: {props.lookAheadLevel}</span> 
         </Card.Meta>
         <Card.Description >
+        <p>
+          <br />
         Each upgrade grants 1 additional future piece to be seen.
+          <br />
+          <br />
+        </p>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

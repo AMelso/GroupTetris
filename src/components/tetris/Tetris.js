@@ -19,6 +19,7 @@ import { useGameStatus } from './hooks/useGameStatus'
 import Stage from './Stage'
 import Display from './Display'
 import StartButton from './StartButton'
+import { useAuthState } from '../../firebase'
 import Lookahead from './Lookahead'
 
 const Tetris = () => {
@@ -38,6 +39,10 @@ const Tetris = () => {
   }
 
   const startGame = () => {
+   /* if(user?.displayName === null){
+      alert("You need to setup your profile name first!");
+      return false;
+    }*/
     // Reset everything
     setStage(createStage())
     setDropTime(1000)
@@ -49,7 +54,7 @@ const Tetris = () => {
   }
 
   const endGame = () => {
-    // console.log('GAME OVER!!!')
+    // console.log('GAME OVER!!!!')
     setGameOver(true)
     setDropTime(null)
     // console.log('END GAME: UPDATING SCORE ON FIREBASE')

@@ -36,8 +36,10 @@ const UpgradeHeader = () => {
     
       const availablePoints = await GetPoints()
       setPointsToSpend(availablePoints)
+      
     }
     userAvailablePoints()
+    
   }, [])
 
   
@@ -57,7 +59,7 @@ const UpgradeHeader = () => {
 }
 
 // a container < that contains a row < of columns which have individual upgrade card components imported
-const UpgradeCards = () => {
+export const UpgradeCards = () => {
 
   // Get upgrade levels from database
   // return upgrade cards with level data

@@ -14,7 +14,8 @@ export const LookAheadCard = (props) => {
 
   const UpgradeClick = () => {
     SaveUpgrade(upgradeName,level,cost)
-    UpgradeCards()
+    props.updateLevelState(upgradeName, level)
+    // UpgradeCards()
   }
 
   //UPGRADE COST LOGIC

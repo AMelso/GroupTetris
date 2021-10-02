@@ -118,13 +118,19 @@ export const UpgradeCards = () => {
 
   }, [])
 
+  const updateLevelState = (card, level) => {
+    if (card == 'lookAhead') {
+      setlookAheadLevel(level)
+    }
+  }
+
   return(
     <Container>
       <Grid columns='equal'>
 
         {/* 1st upgrade card */}
         <Grid.Column>
-          <LookAheadCard lookAheadLevel={lookAheadLevel}/>
+          <LookAheadCard lookAheadLevel={lookAheadLevel} updateLevelState={updateLevelState}/>
         </Grid.Column>
 
         {/* 2nd upgrade card */}

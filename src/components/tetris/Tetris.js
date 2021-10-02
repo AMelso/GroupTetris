@@ -25,6 +25,7 @@ const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
   const [ gameOver, setGameOver ] = useState(false)
   const [ totalPoints, setTotalPoints ] = useState(null)
+  const [ look, setLook ] = useState([])
 
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
@@ -45,7 +46,6 @@ const Tetris = () => {
     setScore(0)
     setRows(0)
     setLevel(0)
-    //console.log("Player Tetromino:", player.tetromino)
   }
 
   const endGame = () => {
@@ -100,7 +100,7 @@ const Tetris = () => {
         movePlayer(1)
       } else if (keyCode === 40) {
         dropPlayer()
-        console.log(TETROMINOS[player.queue[1]].shape)
+        //console.log(TETROMINOS[player.queue[1]].shape)
       } else if (keyCode === 38) {
         playerRotate(stage, 1)
       }
@@ -120,13 +120,23 @@ const Tetris = () => {
     updateTotalPoints()
   }, [oldPoints, score])
 
+  
+
   // Get the upgrades
   useEffect(() => {
     const retrieveUpgrades = async () => { // must be async to work properly
-      const upgrades = await GetUpgrades()
-      console.log('LOOK AHEAD LEVEL: ', upgrades.lookAhead)
+      let lookConst = [];
+      const upgradeHolder = await GetUpgrades()
+      //console.log('upgrade level', upgradeHolder.lookAhead)
+      for (let x = 1; x < upgradeHolder.lookAhead+1; x++) {
+        lookConst.push(x)
+      }
+      setLook(lookConst)
+
+      
     }
     retrieveUpgrades()
+    //console.log(look)
   }, [])
 
   return (
@@ -154,19 +164,15 @@ const Tetris = () => {
         </aside>
         <asideLookahead>
           { gameOver ? (
-            // We may want to keep score/rows/level displayed even after game over. This code hides them.
-            <Display gameOver={gameOver} text="Game Over" />
+            <div></div>
           ) : (
               <Grid>
-              <label style={{ color: 'white', fontFamily: 'Pixel', fontSize: '0.8rem'}} for="next" color="white">Next Pieces</label>
-              <Lookahead id="next" tetrominos={TETROMINOS[player.queue[1]].shape} />
-              <Lookahead tetrominos={TETROMINOS[player.queue[2]].shape} />
-              <Lookahead tetrominos={TETROMINOS[player.queue[3]].shape} />
-              <Lookahead tetrominos={TETROMINOS[player.queue[4]].shape} />
-              <Lookahead tetrominos={TETROMINOS[player.queue[5]].shape} />
+              <label style={{ color: 'white', fontFamily: 'Pixel', fontSize: '0.8rem'}} color="white">Next Pieces</label>
+              {look.map((data,id)=>{
+                return <Lookahead tetrominos={TETROMINOS[player.queue[data]].shape} />
+              })}
               </Grid>
           )}
-          
         </asideLookahead>
       </StyledTetris>
     </StyledTetrisWrapper>

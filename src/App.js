@@ -17,6 +17,8 @@ import Tetris from './components/tetris/Tetris'
 import Forum from './components/Pages/Forum'
 import AddForum from './components/Pages/AddForum'
 import EditForum from './components/Pages/EditForum'
+import PublicForum from './components/Pages/PublicForum'
+import ForumDetails from './components/Pages/ForumDetails'
 // import TetrisDemo from './components/tetrisDemo/Tetris'
 
 
@@ -61,6 +63,8 @@ const App = () => {
           <AuthenticatedRoute exact path="/tetris" component={Tetris} />
           <AuthenticatedRoute exact path="/forum/add" component={AddForum} />
           <AuthenticatedRoute exact path="/forum/:id/edit" component={EditForum} />
+          <AuthenticatedRoute exact path="/forums" component={PublicForum} />
+          <AuthenticatedRoute exact path="/forums/:id" component={ForumDetails} />
           <AuthenticatedRoute exact path="/forum" component={Forum} />
           <AuthenticatedRoute exact path="/profile" component={ProfilePage} />
           <AuthenticatedRoute exact path="/upgrade" component={Upgrade} />

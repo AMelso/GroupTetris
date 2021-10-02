@@ -35,7 +35,13 @@ const AuthNavBar = () => {
             <Icon name='gamepad'/>
             Tetris
           </Menu.Item>
-
+          <Menu.Item
+            as={NavLink} exact to="/forums"
+            name='forums'
+          >
+            <Icon name='blogger'/>
+            Forum
+          </Menu.Item>
           {/* menu position right starts elements on right side of navbar */}
           <Menu.Menu position='right'>
             {/* Logout button logs out on click, since its unauthenticated, gets thrown to home, which redirects to login */}

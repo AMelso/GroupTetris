@@ -25,7 +25,7 @@ export const StyledTetris = styled.div`
     padding: 0 20px;
   }
 
-  asideLookahead {
+  asidelookahead {
     width: 100%;
     max-width: 180px;
     display: block;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Redirect } from 'react-router'
 
 import { createStage, checkCollision } from './files/gameHelpers'
 import { UpdatePoints, UpdateLeaderBoards } from './files/fireBaseIntegration'
@@ -60,7 +61,7 @@ const Tetris = () => {
     // console.log('END GAME: UPDATING SCORE ON FIREBASE')
     // console.log('OLD POINTS: ', oldPoints, 'SCORE: ', score, 'TOTAL: ', totalPoints)
     UpdatePoints(totalPoints)
-    UpdateLeaderBoards(totalPoints, score)
+    UpdateLeaderBoards(totalPoints, score);
   }
 
   const drop = () => {
@@ -140,6 +141,10 @@ const Tetris = () => {
     retrieveUpgrades()
   }, [])
 
+  // const UpgradesRedirect = () => {
+  //   props.history.push("/upgrades");
+  // }
+
   return (
     <StyledTetrisWrapper
         role="button" 
@@ -151,7 +156,10 @@ const Tetris = () => {
         <aside>
           { gameOver ? (
             // We may want to keep score/rows/level displayed even after game over. This code hides them.
+            <>
             <Display gameOver={gameOver} text="Game Over" />
+            <Redirect to="/upgrade" />
+            </>
           ) : (
             <div>
               <div>

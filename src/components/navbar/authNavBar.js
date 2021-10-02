@@ -56,6 +56,14 @@ const AuthNavBar = () => {
             </Menu.Item>
 
             <Menu.Item
+            as={NavLink} exact to="/forum"
+            name='Forum'
+            >
+            <Icon name='comments'/>
+            Forum
+            </Menu.Item>
+
+            <Menu.Item
               name='logout'
               onClick={() => signOut(getAuth())}
             >

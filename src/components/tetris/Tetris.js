@@ -85,14 +85,12 @@ const Tetris = () => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        // console.log('interval on')
         setDropTime(1000 / (level + 1) + 200)
       }
     }
   }
 
   const dropPlayer = () => {
-    // console.log('interval off')
     setDropTime(null)
     drop()
   }
@@ -105,7 +103,6 @@ const Tetris = () => {
         movePlayer(1)
       } else if (keyCode === 40) {
         dropPlayer()
-        //console.log(TETROMINOS[player.queue[1]].shape)
       } else if (keyCode === 38) {
         playerRotate(stage, 1)
       }
@@ -117,9 +114,9 @@ const Tetris = () => {
     drop();
   }, dropTime)
 
+  // Updates Points
   useEffect(() => {
     const updateTotalPoints = () => {
-      // console.log('OLD POINTS OR SCORE CHANGED: ', oldPoints, score)
       setTotalPoints(oldPoints + score)
     }
     updateTotalPoints()
@@ -132,16 +129,15 @@ const Tetris = () => {
     const retrieveUpgrades = async () => { // must be async to work properly
       let lookConst = [];
       const upgradeHolder = await GetUpgrades()
-      //console.log('upgrade level', upgradeHolder.lookAhead)
+
+      // for loop builds array used in rendering lookahead components
+      // tiedl to the lookAhead portion of GetUpgrades() above
       for (let x = 1; x < upgradeHolder.lookAhead+1; x++) {
         lookConst.push(x)
       }
       setLook(lookConst)
-
-      
     }
     retrieveUpgrades()
-    //console.log(look)
   }, [])
 
   return (
@@ -167,18 +163,18 @@ const Tetris = () => {
           )}
           <StartButton callback={startGame} />
         </aside>
-        <asideLookahead>
+        <>
           { gameOver ? (
             <div></div>
-          ) : (
+          ) : ( // Renders the lookAhead Components using the state array look
               <Grid>
               <label style={{ color: 'white', fontFamily: 'Pixel', fontSize: '0.8rem'}} color="white">Next Pieces</label>
               {look.map((data,id)=>{
-                return <Lookahead tetrominos={TETROMINOS[player.queue[data]].shape} />
+                return <Lookahead tetrominos={TETROMINOS[player.queue[data]].shape} key={id} />
               })}
               </Grid>
           )}
-        </asideLookahead>
+        </>
       </StyledTetris>
     </StyledTetrisWrapper>
   )

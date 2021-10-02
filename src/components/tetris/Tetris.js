@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react'
 
 import { createStage, checkCollision } from './files/gameHelpers'
 import { UpdatePoints, UpdateLeaderBoards } from './files/fireBaseIntegration'
+import { GetUpgrades } from '../Pages/UpgradeFiles/UpgradesFirebase'
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
+import { TETROMINOS } from './files/tetrominos'
+import { Grid } from './styles/StyledLookahead'
 
 // Custom Hooks
 import { useInterval } from './hooks/useInterval'
@@ -16,20 +19,30 @@ import { useGameStatus } from './hooks/useGameStatus'
 import Stage from './Stage'
 import Display from './Display'
 import StartButton from './StartButton'
+<<<<<<< HEAD
 import { useAuthState } from '../../firebase'
+=======
+import Lookahead from './Lookahead'
+>>>>>>> Development
 
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
   const [ gameOver, setGameOver ] = useState(false)
   const [ totalPoints, setTotalPoints ] = useState(null)
+  const [ look, setLook ] = useState([])
 
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
+<<<<<<< HEAD
   const [ oldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
   const { user } = useAuthState();
 
   // console.log('re-render')
 
+=======
+  const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
+  
+>>>>>>> Development
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: (dir), y: 0})) {
       updatePlayerPos({ x: dir, y: 0 })
@@ -103,6 +116,7 @@ const Tetris = () => {
         movePlayer(1)
       } else if (keyCode === 40) {
         dropPlayer()
+        //console.log(TETROMINOS[player.queue[1]].shape)
       } else if (keyCode === 38) {
         playerRotate(stage, 1)
       }
@@ -122,6 +136,25 @@ const Tetris = () => {
     updateTotalPoints()
   }, [oldPoints, score])
 
+  
+
+  // Get the upgrades
+  useEffect(() => {
+    const retrieveUpgrades = async () => { // must be async to work properly
+      let lookConst = [];
+      const upgradeHolder = await GetUpgrades()
+      //console.log('upgrade level', upgradeHolder.lookAhead)
+      for (let x = 1; x < upgradeHolder.lookAhead+1; x++) {
+        lookConst.push(x)
+      }
+      setLook(lookConst)
+
+      
+    }
+    retrieveUpgrades()
+    //console.log(look)
+  }, [])
+
   return (
     <StyledTetrisWrapper
         role="button" 
@@ -136,14 +169,27 @@ const Tetris = () => {
             <Display gameOver={gameOver} text="Game Over" />
           ) : (
             <div>
+              <div>
               <Display text={`Total: ${totalPoints}`} />
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
-              <Display text={`Level: ${level}`} />
+              </div>
             </div>
           )}
           <StartButton callback={startGame} />
         </aside>
+        <asideLookahead>
+          { gameOver ? (
+            <div></div>
+          ) : (
+              <Grid>
+              <label style={{ color: 'white', fontFamily: 'Pixel', fontSize: '0.8rem'}} color="white">Next Pieces</label>
+              {look.map((data,id)=>{
+                return <Lookahead tetrominos={TETROMINOS[player.queue[data]].shape} />
+              })}
+              </Grid>
+          )}
+        </asideLookahead>
       </StyledTetris>
     </StyledTetrisWrapper>
   )

@@ -49,7 +49,7 @@ const Tetris = () => {
   }
 
   const endGame = () => {
-    // console.log('GAME OVER!!!')
+    // console.log('GAME OVER!!!!')
     setGameOver(true)
     setDropTime(null)
     // console.log('END GAME: UPDATING SCORE ON FIREBASE')

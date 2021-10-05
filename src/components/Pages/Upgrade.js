@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { Container, Image, Button, Card, Icon, Label, Divider, Grid } from 'semantic-ui-react'
 import { useAuthState } from '../../firebase'
 import { GetPoints, GetUpgrades, SaveUpgrade, SpendPoints } from './UpgradeFiles/UpgradesFirebase'
@@ -35,13 +35,29 @@ export const UpgradeCards = () => {
       const upgradeLevels = await GetUpgrades();
     
       // lookAhead upgrade
-      setlookAheadLevel(upgradeLevels['lookAhead'])
-    
+      if (isNaN(upgradeLevels['lookAhead'])){
+        upgradeLevels['lookAhead'] = 0;
+        setlookAheadLevel(upgradeLevels['lookAhead'])}
+      else{
+      setlookAheadLevel(upgradeLevels['lookAhead'])}
+
       // dropSpeed upgrade
-      setdropSpeedLevel(upgradeLevels['dropSpeed'])
+      if (isNaN(upgradeLevels['dropSpeed'])){
+        upgradeLevels['dropSpeed'] = 0;
+        setdropSpeedLevel(upgradeLevels['dropSpeed'])}
+      else{
+      setdropSpeedLevel(upgradeLevels['dropSpeed'])}
+
+      // demoCharge upgrade
+      if (isNaN(upgradeLevels['demolitionCharge'])){
+        upgradeLevels['demolitionCharge'] = 0;
+        setdemolitionChargeLevel(upgradeLevels['demolitionCharge'])}
+      else{
+      setdemolitionChargeLevel(upgradeLevels['demolitionCharge'])}
+
       
-      // demolitionCharge upgrade
-      setdemolitionChargeLevel(upgradeLevels['demolitionCharge'])
+    
+      
     }
     // call the function to complete the promise
     upgradeLevelsImport()
@@ -88,6 +104,7 @@ export const UpgradeCards = () => {
 
   return(
     <>
+    
     <UserPointsBar/>
     <Divider section/>
       <Container>

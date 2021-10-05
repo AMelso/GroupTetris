@@ -23,6 +23,15 @@ export const UpgradeCards = () => {
   
   // use state to get points available
   const [pointsToSpend, setPointsToSpend] = useState(0);
+  
+  const negPointsQuickFix = () => {
+    if (pointsToSpend < 0) {
+      userAvailablePoints()
+    }
+  }
+  
+  
+  
 
 
   // pull in upgrade levels from firebase. GetUpgrades db call from UpgradesFirebase.js
@@ -30,6 +39,8 @@ export const UpgradeCards = () => {
 
     // main function to call the database
     const upgradeLevelsImport = async () => {
+
+      
     
       // create variable to store level, calls GetUpgrades
       const upgradeLevels = await GetUpgrades();
@@ -69,6 +80,8 @@ export const UpgradeCards = () => {
     
     const availablePoints = await GetPoints()
     setPointsToSpend(availablePoints)
+    negPointsQuickFix()
+    
     
   }
   userAvailablePoints()

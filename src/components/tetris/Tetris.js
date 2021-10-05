@@ -40,13 +40,12 @@ const Tetris = () => {
   }
 
   const startGame = () => {
-   /* if(user?.displayName === null){
+    /* if(user?.displayName === null){
       alert("You need to setup your profile name first!");
       return false;
     }*/
     // Reset everything
     setStage(createStage())
-    setDropTime(1000)
     resetPlayer()
     setGameOver(false)
     setScore(0)
@@ -137,6 +136,10 @@ const Tetris = () => {
         lookConst.push(x)
       }
       setLook(lookConst)
+
+      // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
+      const dropSpeed = (upgradeHolder.dropSpeed * 100) + 1000
+      setDropTime(dropSpeed)
     }
     retrieveUpgrades()
   }, [])

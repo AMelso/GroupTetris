@@ -19,11 +19,16 @@ export const DropSpeedCard = (props) => {
   //UPGRADE COST LOGIC
   // object of upgrade cost
   const upgradeToLevelCost = {
-    "1":500,
-    "2":1000,
-    "3":2000,
-    "4":3000,
-    "5":4000
+    "1":200,
+    "2":400,
+    "3":600,
+    "4":800,
+    "5":1000,
+    "6":1200,
+    "7":1400,
+    "8":1600,
+    "9":1800,
+    "10":2000,
   }
 
   // assign to a variable, which adds 1 to the current level from props
@@ -34,7 +39,7 @@ export const DropSpeedCard = (props) => {
   var points = parseInt(props.pointsToSpend)
   var short = cost - points
 
-  if (level > 5) {
+  if (level > 10) {
     var upgradeButton = 
       "Max Level"
   } else if (cost > points){

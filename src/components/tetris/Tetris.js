@@ -176,7 +176,7 @@ const Tetris = () => {
             <div></div>
           ) : ( // Renders the lookAhead Components using the state array look
               <Grid>
-              <label style={{ color: 'white', fontFamily: 'Pixel', fontSize: '0.8rem'}} color="white">Next Pieces</label>
+              <label style={{ color: '#737373', fontFamily: 'Pixel', fontSize: '0.8rem'}} color="white">Next Pieces</label>
               {look.map((data,id)=>{
                 return <Lookahead tetrominos={TETROMINOS[player.queue[data]].shape} key={id} />
               })}

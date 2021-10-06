@@ -25,6 +25,7 @@ import Lookahead from './Lookahead'
 
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
+  const [ varDropSpeed, setVarDropSpeed ] = useState(null)
   const [ gameOver, setGameOver ] = useState(false)
   const [ totalPoints, setTotalPoints ] = useState(null)
   const [ look, setLook ] = useState([])
@@ -68,7 +69,7 @@ const Tetris = () => {
     if (rows > (level + 1) * 10) {
       setLevel(prev => prev + 1)
       // Also increase speed
-      setDropTime(1000 / (level + 1) + 200)
+      setDropTime(varDropSpeed / (level + 1) + 200)
     }
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
@@ -85,7 +86,7 @@ const Tetris = () => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        setDropTime(1000 / (level + 1) + 200)
+        setDropTime(varDropSpeed / (level + 1) + 200)
       }
     }
   }
@@ -139,6 +140,7 @@ const Tetris = () => {
 
       // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
       const dropSpeed = (upgradeHolder.dropSpeed * 100) + 1000
+      setVarDropSpeed(dropSpeed)
       setDropTime(dropSpeed)
     }
     retrieveUpgrades()

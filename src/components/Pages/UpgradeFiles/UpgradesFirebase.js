@@ -1,9 +1,17 @@
 import { getFirestore, collection, query, getDocs, setDoc, doc, updateDoc, increment, getDoc } from "firebase/firestore"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { Upgrade } from '../Upgrade'
+
+
+
+import {useState, useEffect} from "react"
+
+
 const db = getFirestore()
 
 const auth = getAuth()
 let userUID = ''
+
 
 onAuthStateChanged(auth, (user => {
   
@@ -35,15 +43,23 @@ export const GetUpgrades = async () => {
   return upgrades
 }
 
-export const SaveUpgrade = async (upgradeName, level) => {
+export const SaveUpgrade = async (upgradeName, level, cost) => {
+  
   await setDoc(doc(db, `users/${userUID}/upgrades`, upgradeName), { // Set document path ending in ID of upgradeName
     level: level, // Save the upgrade level in above document
   })
+  SpendPoints(cost)
+
 }
 
 export const SpendPoints = async (cost) => { // cost needs to be a positive integer
+  
+  
   const pointsRef = doc(db, `users`, userUID) // Document path
   await updateDoc(pointsRef, {
     points: increment(-cost) // remove cost value from points
   })
+  
+
 }
+

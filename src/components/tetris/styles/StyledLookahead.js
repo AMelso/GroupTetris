@@ -15,8 +15,8 @@ export const StyledLookahead = styled.div`
   );
   grid-template-columns: repeat(${props => props.height}, min(25px));
   grid-gap: 1px;
-  border: 2px solid #333;
+  border: 2px solid #ddd;
   width: 59%;
   max-width: 25vw;
-  background: #111;
+  background: #f2f2f2;
 `

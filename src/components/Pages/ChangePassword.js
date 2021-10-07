@@ -8,6 +8,7 @@ const ChangePassword = () => {
 
     let defaultError = {errorPass:false,errorcPass:false};
     //state variable of error and function setError on UI
+    
     //show error message on browser
     const[error,setError]= useState(defaultError);
     // cpassword equals confirmed password

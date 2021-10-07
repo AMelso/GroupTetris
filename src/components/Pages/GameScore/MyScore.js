@@ -11,7 +11,7 @@ const MyScore = ({gameScoreList}) => {
               {/* when we connect firebase api data we will just put api data in gameScoreList */}
               <li className="row headers">
                     <span className="col-md-2">No:</span>
-                    <span className="col-md-7">Play Time </span>
+                    <span className="col-md-7"></span>
                     <span className="col-md-3">Score</span>
               </li>
               {/* loops thru scores by index retries index, date, score */}
@@ -19,7 +19,7 @@ const MyScore = ({gameScoreList}) => {
               (
                     <li key={index} className="row">
                         <span className="col-md-2">{index+1}</span>
-                        <span className="col-md-7">{score.date}</span>
+                        <span className="col-md-7"></span>
                         <span className="col-md-3">{score.score}</span>
                     </li>
               ))}

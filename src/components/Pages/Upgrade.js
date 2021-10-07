@@ -103,11 +103,14 @@ export const UpgradeCards = () => {
   const UserPointsBar = () => {
     return(
     <Grid columns='equal'>
-      {/* column 1 */}
+      <Grid.Column>
+        {user?.displayName}
+      </Grid.Column>
+      {/* column 2 */}
       <Grid.Column width={8}>
         <span>&nbsp;&nbsp;&nbsp;&nbsp;{user?.email}</span>
       </Grid.Column>
-      {/* column 2 */}
+      {/* column 3 */}
       <Grid.Column>
         Points: {pointsToSpend}
       </Grid.Column>
@@ -134,9 +137,9 @@ export const UpgradeCards = () => {
           </Grid.Column>
 
           {/* 3rd upgrade card */}
-          <Grid.Column>
+          {/* <Grid.Column>
             <DemolitionChargeCard demolitionChargeLevel={demolitionChargeLevel} updateLevelState={updateLevelState} pointsToSpend={pointsToSpend}/>
-          </Grid.Column>
+          </Grid.Column> */}
 
         </Grid>
       </Container>

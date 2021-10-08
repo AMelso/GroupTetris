@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Redirect } from 'react-router'
 
 import { createStage, checkCollision } from './files/gameHelpers'
+import { UpdatePoints, UpdateLeaderBoards } from './files/fireBaseIntegration'
+import { GetUpgrades } from '../Pages/UpgradeFiles/UpgradesFirebase'
 
 // Styled Components
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris'
+import { TETROMINOS } from './files/tetrominos'
+import { Grid } from './styles/StyledLookahead'
 
 // Custom Hooks
 import { useInterval } from './hooks/useInterval'
@@ -15,17 +20,20 @@ import { useGameStatus } from './hooks/useGameStatus'
 import Stage from './Stage'
 import Display from './Display'
 import StartButton from './StartButton'
+import { useAuthState } from '../../firebase'
+import Lookahead from './Lookahead'
 
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
+  const [ varDropSpeed, setVarDropSpeed ] = useState(null)
   const [ gameOver, setGameOver ] = useState(false)
+  const [ totalPoints, setTotalPoints ] = useState(null)
+  const [ look, setLook ] = useState([])
 
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
-  const [ score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
-
-  console.log('re-render')
-
+  const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
+  
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: (dir), y: 0})) {
       updatePlayerPos({ x: dir, y: 0 })
@@ -33,14 +41,28 @@ const Tetris = () => {
   }
 
   const startGame = () => {
+    /* if(user?.displayName === null){
+      alert("You need to setup your profile name first!");
+      return false;
+    }*/
     // Reset everything
     setStage(createStage())
-    setDropTime(1000)
     resetPlayer()
     setGameOver(false)
+    setDropTime(varDropSpeed)
     setScore(0)
     setRows(0)
     setLevel(0)
+  }
+
+  const endGame = () => {
+    // console.log('GAME OVER!!!!')
+    setGameOver(true)
+    setDropTime(null)
+    // console.log('END GAME: UPDATING SCORE ON FIREBASE')
+    // console.log('OLD POINTS: ', oldPoints, 'SCORE: ', score, 'TOTAL: ', totalPoints)
+    UpdatePoints(totalPoints)
+    UpdateLeaderBoards(totalPoints, score);
   }
 
   const drop = () => {
@@ -48,7 +70,7 @@ const Tetris = () => {
     if (rows > (level + 1) * 10) {
       setLevel(prev => prev + 1)
       // Also increase speed
-      setDropTime(1000 / (level + 1) + 200)
+      setDropTime(varDropSpeed / (level + 1) + 200)
     }
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
@@ -56,9 +78,7 @@ const Tetris = () => {
     } else {
       // Game over
       if (player.pos.y < 1) {
-        console.log('GAME OVER!!!')
-        setGameOver(true)
-        setDropTime(null)
+        endGame()
       }
       updatePlayerPos({ x: 0, y: 0, collided: true })
     }
@@ -67,14 +87,12 @@ const Tetris = () => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        console.log('interval on')
-        setDropTime(1000 / (level + 1) + 200)
+        setDropTime(varDropSpeed / (level + 1) + 200)
       }
     }
   }
 
   const dropPlayer = () => {
-    console.log('interval off')
     setDropTime(null)
     drop()
   }
@@ -98,6 +116,40 @@ const Tetris = () => {
     drop();
   }, dropTime)
 
+  // Updates Points
+  useEffect(() => {
+    const updateTotalPoints = () => {
+      setTotalPoints(oldPoints + score)
+    }
+    updateTotalPoints()
+  }, [oldPoints, score])
+
+  
+
+  // Get the upgrades
+  useEffect(() => {
+    const retrieveUpgrades = async () => { // must be async to work properly
+      let lookConst = [];
+      const upgradeHolder = await GetUpgrades()
+
+      // for loop builds array used in rendering lookahead components
+      // tiedl to the lookAhead portion of GetUpgrades() above
+      for (let x = 1; x < upgradeHolder.lookAhead+1; x++) {
+        lookConst.push(x)
+      }
+      setLook(lookConst)
+
+      // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
+      const dropSpeed = (upgradeHolder.dropSpeed * 100) + 500
+      setVarDropSpeed(dropSpeed)
+    }
+    retrieveUpgrades()
+  }, [])
+
+  // const UpgradesRedirect = () => {
+  //   props.history.push("/upgrades");
+  // }
+
   return (
     <StyledTetrisWrapper
         role="button" 
@@ -109,16 +161,33 @@ const Tetris = () => {
         <aside>
           { gameOver ? (
             // We may want to keep score/rows/level displayed even after game over. This code hides them.
+            <>
             <Display gameOver={gameOver} text="Game Over" />
+            <Redirect to="/upgrade" />
+            </>
           ) : (
             <div>
+              <div>
+              <Display text={`Total: ${totalPoints}`} />
               <Display text={`Score: ${score}`} />
               <Display text={`Rows: ${rows}`} />
-              <Display text={`Level: ${level}`} />
+              </div>
             </div>
           )}
           <StartButton callback={startGame} />
         </aside>
+        <>
+          { gameOver ? (
+            <div></div>
+          ) : ( // Renders the lookAhead Components using the state array look
+              <Grid>
+              <label style={{ color: '#737373', fontFamily: 'Pixel', fontSize: '0.8rem'}} color="white">Next Pieces</label>
+              {look.map((data,id)=>{
+                return <Lookahead tetrominos={TETROMINOS[player.queue[data]].shape} key={id} />
+              })}
+              </Grid>
+          )}
+        </>
       </StyledTetris>
     </StyledTetrisWrapper>
   )

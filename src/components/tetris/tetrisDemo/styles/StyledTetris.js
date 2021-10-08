@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
-import bgImage from '../img/bg.png'
+// import bgImage from '../img/bg.png'
 
 // May need to adjust height here to work well with nav bar
 export const StyledTetrisWrapper = styled.div`
-  width: 100%;
-  height: 85vh;
+  width: 100vw;
+  height: 80vh;
+  background-size: cover;
   overflow: hidden;
 `
 
@@ -19,13 +20,6 @@ export const StyledTetris = styled.div`
   aside {
     width: 100%;
     max-width: 200px;
-    display: block;
-    padding: 0 20px;
-  }
-
-  asidelookahead {
-    width: 100%;
-    max-width: 180px;
     display: block;
     padding: 0 20px;
   }

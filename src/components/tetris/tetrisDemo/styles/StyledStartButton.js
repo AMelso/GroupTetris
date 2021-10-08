@@ -1,17 +1,17 @@
 import styled from 'styled-components'
 
-export const StyledDisplay = styled.div`
+export const StyledStartButton = styled.button`
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
   margin: 0 0 20px 0;
   padding: 20px;
-  border: 4px solid #ddd;
   min-height: 30px;
   width: 100%;
   border-radius: 20px;
-  color: ${props => (props.gameOver ? 'red' : '#737373')};
-  background: #f2f2f2;
+  border: none;
+  color: white;
+  background #333;
   font-family: Pixel, Arial, Helvetica, sans-serif;
-  font-size: 0.8rem;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
 `

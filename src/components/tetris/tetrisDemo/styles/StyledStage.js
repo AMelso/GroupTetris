@@ -10,9 +10,6 @@ export const StyledStage = styled.div`
   grid-gap: 1px;
   border: 2px solid #ddd;
   width: 100%;
-  max-width: 20vw;
+  max-width: 25vw;
   background: #f2f2f2;
-  height: 100%;
-  max-height: 100%;
-  overflow: visible;
 `

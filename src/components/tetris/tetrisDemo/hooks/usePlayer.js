@@ -1,31 +1,14 @@
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback } from 'react'
 
+import { TETROMINOS, randomTetromino } from '../files/tetrominos'
 import { checkCollision, STAGE_WIDTH } from '../files/gameHelpers'
-import { TETROMINOS } from '../files/tetrominos'
 
 export const usePlayer = () => {
-
-  const [ final, setFinal ] = useState('IJLOSTZ')
-  const [ count, setCount ] = useState(0)
-  const ref = useRef(final)
-  
   const [ player, setPlayer ] = useState({
     pos: { x: 0, y: 0 },
     tetromino: TETROMINOS[0].shape,
     collided: false,
-    queue: ref.current,
   })
-  
-  // initializes and updates the queue of next blocks
-  useEffect(() => {
-    const tetrominos = 'IJLOSTZ'
-    const updateString = () => {
-      let randLetter = Math.floor(Math.random() * tetrominos.length)
-      setFinal(prev => (prev.substring(1))+tetrominos[randLetter])
-      ref.current = final
-    }
-    updateString()
-  }, [count])
 
   const rotate = (matrix, dir) => {
     // Make the rows into columns (transpose)
@@ -55,7 +38,7 @@ export const usePlayer = () => {
 
     setPlayer(clonedPlayer)
   }
-
+  
   const updatePlayerPos = ({ x, y, collided }) => {
     setPlayer(prev => ({
       ...prev,
@@ -67,16 +50,10 @@ export const usePlayer = () => {
   const resetPlayer = useCallback(() => {
     setPlayer({
       pos: { x: STAGE_WIDTH / 2 - 2, y: 0 },
-      tetromino: TETROMINOS[ref.current[0]].shape,
+      tetromino: randomTetromino().shape,
       collided: false,
-      queue: ref.current
     })
-    nextTetromino();
   }, [])
- 
-  const nextTetromino = () => {  
-    setCount(prev => prev+1)
-  }
 
-  return [player, updatePlayerPos, resetPlayer, playerRotate ]
+  return [player, updatePlayerPos, resetPlayer, playerRotate]
 }

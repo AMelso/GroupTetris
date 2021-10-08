@@ -8,16 +8,16 @@ const UnAuthNavBar = () => {
   return (
     <Menu icon='labeled'>
       {/* first item, give link, and component name (dev tools menu item name) */}
-      <Menu.Item
+      {/* <Menu.Item
         as={NavLink} exact to="/"
-        name='home'
-        // add a divider for html txt
-      >
+        name='home' */}
+        {/* // add a divider for html txt
+      // > */}
         {/* set icon by name from icon names url */}
-        <Icon name='home'/>
+        {/* <Icon name='home'/> */}
         {/* text to label navbar menu item */}
-        Home
-      </Menu.Item>
+        {/* Home
+      </Menu.Item> */}
       <Menu.Item
         as={NavLink} exact to="/login"
         name='login'

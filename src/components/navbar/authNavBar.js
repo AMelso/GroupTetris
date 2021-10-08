@@ -61,13 +61,13 @@ const AuthNavBar = () => {
             Leader Board
             </Menu.Item>
 
-            <Menu.Item
+            {/* <Menu.Item
             as={NavLink} exact to="/forum"
             name='Forum'
             >
             <Icon name='comments'/>
             Forum
-            </Menu.Item>
+            </Menu.Item> */}
 
             <Menu.Item
               name='logout'

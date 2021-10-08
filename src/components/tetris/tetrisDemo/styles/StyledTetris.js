@@ -5,7 +5,7 @@ import styled from 'styled-components'
 // May need to adjust height here to work well with nav bar
 export const StyledTetrisWrapper = styled.div`
   width: 100vw;
-  height: 97vh;
+  height: 80vh;
   background-size: cover;
   overflow: hidden;
 `

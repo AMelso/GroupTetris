@@ -6,7 +6,7 @@ export const Home = () => {
   
   return (
     <>
-      <h1>Welcome, {user?.displayName}<br/>Email: ({user?.email})</h1>
+      <h1>Hello {user?.displayName}, Welcome to Tetris-Lite. <br/></h1>
       <TetrisDemo />
     </>
   )

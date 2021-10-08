@@ -49,7 +49,8 @@ const Tetris = () => {
     setStage(createStage())
     resetPlayer()
     setGameOver(false)
-    setDropTime(varDropSpeed)
+    setDropTime(100)
+    // setDropTime(varDropSpeed)
     setScore(0)
     setRows(0)
     setLevel(0)
@@ -140,7 +141,7 @@ const Tetris = () => {
       setLook(lookConst)
 
       // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
-      const dropSpeed = (upgradeHolder.dropSpeed * 100) + 5000
+      const dropSpeed = (upgradeHolder.dropSpeed * 100) + 500
       setVarDropSpeed(dropSpeed)
     }
     retrieveUpgrades()

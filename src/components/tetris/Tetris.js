@@ -71,7 +71,8 @@ const Tetris = () => {
     if (rows > (level + 1) * 10) {
       setLevel(prev => prev + 1)
       // Also increase speed
-      setDropTime(varDropSpeed / (level + 1) + 200)
+      // setDropTime(varDropSpeed / (level + 1) + 200)
+      setDropTime(100)
     }
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
@@ -88,7 +89,8 @@ const Tetris = () => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        setDropTime(varDropSpeed / (level + 1) + 200)
+        // setDropTime(varDropSpeed / (level + 1) + 200)
+        setDropTime(100)
       }
     }
   }

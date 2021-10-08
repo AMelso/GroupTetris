@@ -70,7 +70,7 @@ const Tetris = () => {
     if (rows > (level + 1) * 10) {
       setLevel(prev => prev + 1)
       // Also increase speed
-      setDropTime(varDropSpeed / (level + 1) + 1000)
+      setDropTime(varDropSpeed / (level + 1) + 200)
     }
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
@@ -140,7 +140,7 @@ const Tetris = () => {
       setLook(lookConst)
 
       // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
-      const dropSpeed = (upgradeHolder.dropSpeed * 100) + 500
+      const dropSpeed = (upgradeHolder.dropSpeed * 100) + 5000
       setVarDropSpeed(dropSpeed)
     }
     retrieveUpgrades()

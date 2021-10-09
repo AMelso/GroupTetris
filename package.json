@@ -2,10 +2,16 @@
   "name": "firebase-auth-react",
   "version": "0.1.0",
   "private": true,
+  "main": "server.js",
+  "engines": {
+    "npm": "7.7.6",
+    "node": "15.13.0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "express": "^4.17.1",
     "firebase": "^9.0.0-beta.2",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
@@ -15,11 +21,11 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
     "styled-components": "^5.3.1",
-    "web-vitals": "^1.1.2",
-    "yarn": "^1.22.11"
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "heroku-postbuild": "npm install",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

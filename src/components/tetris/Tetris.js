@@ -25,7 +25,7 @@ import Lookahead from './Lookahead'
 
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
-  const [ varDropSpeed, setVarDropSpeed ] = useState(200)
+  const [ varDropSpeed, setVarDropSpeed ] = useState(100)
   const [ gameOver, setGameOver ] = useState(false)
   const [ totalPoints, setTotalPoints ] = useState(null)
   const [ look, setLook ] = useState([])

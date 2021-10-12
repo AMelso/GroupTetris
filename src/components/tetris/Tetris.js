@@ -150,7 +150,7 @@ const Tetris = () => {
       setLook(lookConst)
 
       // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
-      const dropSpeed = (upgradeHolder.dropSpeed * 75) + 200
+      const dropSpeed = (upgradeHolder.dropSpeed * 75) + 100
       console.log("retreive upgrades")
       console.log(upgradeHolder.dropSpeed)
       console.log(dropSpeed)

@@ -69,15 +69,15 @@ const Tetris = () => {
     UpdateLeaderBoards(totalPoints, score);
   }
 
-  // const drop = () => {
-  //   // Increase level when player has cleared 10 rows
-  //   if (rows > (level + 1) * 10) {
-  //     setLevel(prev => prev + 1)
-  //     // Also increase speed
-  //     setDropTime(varDropSpeed + ((level + 1) * 50))
-  //     console.log("drop " + varDropSpeed)
-  //     console.log("drop drop time" + dropTime)
-      // setDropTime(100)
+    const drop = () => {
+    //   // Increase level when player has cleared 10 rows
+      if (rows > (level + 1) * 10) {
+        setLevel(prev => prev + 1)
+    //     // Also increase speed
+    //     setDropTime(varDropSpeed + ((level + 1) * 50))
+    //     console.log("drop " + varDropSpeed)
+    //     console.log("drop drop time" + dropTime)
+        // setDropTime(100)
     }
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
@@ -90,6 +90,7 @@ const Tetris = () => {
       updatePlayerPos({ x: 0, y: 0, collided: true })
     }
   }
+  
 
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
@@ -100,6 +101,7 @@ const Tetris = () => {
       }
     }
   }
+  
 
   const dropPlayer = () => {
     setDropTime(null)

@@ -26,7 +26,7 @@ import ForumDetails from './components/Pages/ForumDetails'
 // C is a placeholder for passed component from route tree. 
 const AuthenticatedRoute = ({ component: C, ...props }) => {
   const { isAuthenticated } = useAuthState() // isAuthenticated returns Boolean, pulled from useAuthState().isAuthenticated
-  console.log(`AuthenticatedRoute: ${isAuthenticated}`)
+  
   return (
     <Route
       {...props}
@@ -41,7 +41,7 @@ const AuthenticatedRoute = ({ component: C, ...props }) => {
 // See comments for AuthenticatedRoute
 const UnauthenticatedRoute = ({ component: C, ...props }) => {
   const { isAuthenticated } = useAuthState()
-  console.log(`UnauthenticatedRoute: ${isAuthenticated}`)
+  
   return (
     <Route
       {...props}

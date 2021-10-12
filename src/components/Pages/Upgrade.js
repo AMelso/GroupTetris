@@ -124,7 +124,7 @@ export const UpgradeCards = () => {
     <UserPointsBar/>
     <Divider section/>
       <Container>
-        <Grid columns='equal'>
+        <Grid centered columns={2}>
 
           {/* 1st upgrade card */}
           <Grid.Column>

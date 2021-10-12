@@ -33,6 +33,7 @@ const Tetris = () => {
   const [ player, updatePlayerPos, resetPlayer, playerRotate ] = usePlayer()
   const [ stage, setStage, rowsCleared ] = useStage(player, resetPlayer)
   const [ oldPoints, setOldPoints, score, setScore, rows, setRows, level, setLevel ] = useGameStatus(rowsCleared)
+  console.log("state " + varDropSpeed)
   
   const movePlayer = dir => {
     if (!checkCollision(player, stage, { x: (dir), y: 0})) {
@@ -51,6 +52,8 @@ const Tetris = () => {
     setGameOver(false)
     // setDropTime(100)
     setDropTime(varDropSpeed)
+    console.log("start game " + varDropSpeed)
+    console.log("start game drop time" + dropTime)
     setScore(0)
     setRows(0)
     setLevel(0)
@@ -72,7 +75,9 @@ const Tetris = () => {
       setLevel(prev => prev + 1)
       // Also increase speed
       setDropTime(varDropSpeed + ((level + 1) * 50))
-      setDropTime(100)
+      console.log("drop " + varDropSpeed)
+      console.log("drop drop time" + dropTime)
+      // setDropTime(100)
     }
 
     if (!checkCollision(player, stage, { x: 0, y: 1 })) {
@@ -90,6 +95,8 @@ const Tetris = () => {
     if (!gameOver) {
       if (keyCode === 40) {
         setDropTime(varDropSpeed + ((level + 1) * 50))
+        console.log("key up " + varDropSpeed)
+        console.log("key up drop time" + dropTime)
         // setDropTime(100)
       }
     }
@@ -144,7 +151,11 @@ const Tetris = () => {
 
       // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
       const dropSpeed = (upgradeHolder.dropSpeed * 100) + 500
+      console.log("retreive upgrades")
+      console.log(upgradeHolder.dropSpeed)
+      console.log(dropSpeed)
       setVarDropSpeed(dropSpeed)
+      console.log(varDropSpeed)
     }
     retrieveUpgrades()
   }, [])

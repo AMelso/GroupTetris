@@ -25,7 +25,7 @@ import Lookahead from './Lookahead'
 
 const Tetris = () => {
   const [ dropTime, setDropTime ] = useState(null)
-  const [ varDropSpeed, setVarDropSpeed ] = useState(null)
+  const [ varDropSpeed, setVarDropSpeed ] = useState(200)
   const [ gameOver, setGameOver ] = useState(false)
   const [ totalPoints, setTotalPoints ] = useState(null)
   const [ look, setLook ] = useState([])
@@ -49,8 +49,8 @@ const Tetris = () => {
     setStage(createStage())
     resetPlayer()
     setGameOver(false)
-    setDropTime(100)
-    // setDropTime(varDropSpeed)
+    // setDropTime(100)
+    setDropTime(varDropSpeed)
     setScore(0)
     setRows(0)
     setLevel(0)
@@ -71,7 +71,7 @@ const Tetris = () => {
     if (rows > (level + 1) * 10) {
       setLevel(prev => prev + 1)
       // Also increase speed
-      // setDropTime(varDropSpeed / (level + 1) + 200)
+      setDropTime(varDropSpeed + ((level + 1) * 50))
       setDropTime(100)
     }
 
@@ -89,8 +89,8 @@ const Tetris = () => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        // setDropTime(varDropSpeed / (level + 1) + 200)
-        setDropTime(100)
+        setDropTime(varDropSpeed + ((level + 1) * 50))
+        // setDropTime(100)
       }
     }
   }

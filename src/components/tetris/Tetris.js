@@ -69,14 +69,14 @@ const Tetris = () => {
     UpdateLeaderBoards(totalPoints, score);
   }
 
-  const drop = () => {
-    // Increase level when player has cleared 10 rows
-    if (rows > (level + 1) * 10) {
-      setLevel(prev => prev + 1)
-      // Also increase speed
-      setDropTime(varDropSpeed + ((level + 1) * 50))
-      console.log("drop " + varDropSpeed)
-      console.log("drop drop time" + dropTime)
+  // const drop = () => {
+  //   // Increase level when player has cleared 10 rows
+  //   if (rows > (level + 1) * 10) {
+  //     setLevel(prev => prev + 1)
+  //     // Also increase speed
+  //     setDropTime(varDropSpeed + ((level + 1) * 50))
+  //     console.log("drop " + varDropSpeed)
+  //     console.log("drop drop time" + dropTime)
       // setDropTime(100)
     }
 
@@ -94,9 +94,8 @@ const Tetris = () => {
   const keyUp = ({ keyCode }) => {
     if (!gameOver) {
       if (keyCode === 40) {
-        setDropTime(varDropSpeed + ((level + 1) * 50))
-        console.log("key up " + varDropSpeed)
-        console.log("key up drop time" + dropTime)
+        // setDropTime(varDropSpeed + ((level + 1) * 50))
+        
         // setDropTime(100)
       }
     }
@@ -150,12 +149,12 @@ const Tetris = () => {
       setLook(lookConst)
 
       // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
-      const dropSpeed = (upgradeHolder.dropSpeed * 75) + 100
+      const dropSpeed = (upgradeHolder.dropSpeed * 40) + 100
       console.log("retreive upgrades")
-      console.log(upgradeHolder.dropSpeed)
-      console.log(dropSpeed)
+      console.log("dropspeed level " + upgradeHolder.dropSpeed)
+      console.log("starting dropspeed " + dropSpeed)
       setVarDropSpeed(dropSpeed)
-      console.log(varDropSpeed)
+      console.log("drop speed set to from upgrades " + varDropSpeed)
     }
     retrieveUpgrades()
   }, [])

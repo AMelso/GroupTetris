@@ -151,7 +151,7 @@ const Tetris = () => {
       setLook(lookConst)
 
       // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
-      let dropspeed = 100;
+      let dropSpeed = 100;
       if (isNaN(upgradeHolder.dropSpeed)){
         upgradeHolder.dropSpeed = 0;
         let dropSpeed = 100;}

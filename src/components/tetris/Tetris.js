@@ -151,12 +151,12 @@ const Tetris = () => {
       setLook(lookConst)
 
       // Get dropSpeed level and multiply by 100 then add to 1000 for final dropTime
-
+      let dropspeed = 100;
       if (isNaN(upgradeHolder.dropSpeed)){
         upgradeHolder.dropSpeed = 0;
-        const dropSpeed = 100;}
+        let dropSpeed = 100;}
       else{
-        const dropSpeed = (upgradeHolder.dropSpeed * 30) + 100;
+        let dropSpeed = (upgradeHolder.dropSpeed * 30) + 100;
       }
       
       // console.log("retreive upgrades")

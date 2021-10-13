@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.893fde23.chunk.css",
+    "main.js": "/static/js/main.e79431b9.chunk.js",
+    "main.js.map": "/static/js/main.e79431b9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b3a222ab.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b3a222ab.js.map",
+    "static/css/2.85f7760d.chunk.css": "/static/css/2.85f7760d.chunk.css",
+    "static/js/2.ac47554d.chunk.js": "/static/js/2.ac47554d.chunk.js",
+    "static/js/2.ac47554d.chunk.js.map": "/static/js/2.ac47554d.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.85f7760d.chunk.css.map": "/static/css/2.85f7760d.chunk.css.map",
+    "static/css/main.893fde23.chunk.css.map": "/static/css/main.893fde23.chunk.css.map",
+    "static/js/2.ac47554d.chunk.js.LICENSE.txt": "/static/js/2.ac47554d.chunk.js.LICENSE.txt",
+    "static/media/M118.f6a13bce.jpeg": "/static/media/M118.f6a13bce.jpeg",
+    "static/media/index.css": "/static/media/pure-white-background-images.bf5ad163.jpg",
+    "static/media/bg.d63cfd51.png": "/static/media/bg.d63cfd51.png",
+    "static/media/semantic.min.css": "/static/media/outline-icons.ddae9b1b.woff",
+    "static/media/crystal_ball.8c7e5141.jpeg": "/static/media/crystal_ball.8c7e5141.jpeg",
+    "static/media/timeDilation.9829ebfb.jpeg": "/static/media/timeDilation.9829ebfb.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b3a222ab.js",
+    "static/css/2.85f7760d.chunk.css",
+    "static/js/2.ac47554d.chunk.js",
+    "static/css/main.893fde23.chunk.css",
+    "static/js/main.e79431b9.chunk.js"
+  ]
+}

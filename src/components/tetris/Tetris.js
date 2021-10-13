@@ -154,9 +154,9 @@ const Tetris = () => {
       let dropSpeed = 100;
       if (isNaN(upgradeHolder.dropSpeed)){
         upgradeHolder.dropSpeed = 0;
-        let dropSpeed = 100;}
+        dropSpeed = 100;}
       else{
-        let dropSpeed = (upgradeHolder.dropSpeed * 30) + 100;
+        dropSpeed = (upgradeHolder.dropSpeed * 30) + 100;
       }
       
       // console.log("retreive upgrades")
